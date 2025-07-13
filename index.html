@@ -80,6 +80,7 @@
             text-align: center;
             position: relative;
             z-index: 2;
+            transition: all 0.5s ease;
         }
 
         .main-container {
@@ -91,6 +92,9 @@
             overflow: hidden;
             border: 1px solid var(--card-border);
             display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
         }
 
         .login-header {
@@ -471,6 +475,59 @@
             line-height: 1.6;
         }
 
+        /* Toggle Switch */
+        .toggle-container {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 65px;
+            height: 32px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--toggle-bg);
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 3px;
+            background: #fff;
+            transition: .4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        input:checked + .slider {
+            background: var(--accent-lilac);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(32px);
+            background: white;
+        }
+
         /* Buttons */
         .button-group {
             display: flex;
@@ -521,6 +578,127 @@
             background: linear-gradient(45deg, var(--accent-lilac-light), #b193e1);
             transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(180, 130, 240, 0.6);
+        }
+
+        .btn-secondary {
+            background: rgba(60, 50, 80, 0.5);
+            border: 1px solid var(--card-border);
+            color: var(--text-primary);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(90, 70, 120, 0.4);
+            border-color: var(--accent-lilac);
+            transform: translateY(-3px);
+        }
+
+        /* Combo Box */
+        .combo-box {
+            position: relative;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .combo-box select {
+            width: 100%;
+            padding: 14px 20px;
+            border-radius: 10px;
+            background: var(--toggle-bg);
+            border: 1px solid var(--card-border);
+            color: var(--text-primary);
+            appearance: none;
+            cursor: pointer;
+            font-size: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .combo-box::after {
+            content: '\f078';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        .combo-box select:focus {
+            border-color: var(--accent-lilac);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(200, 162, 255, 0.3);
+        }
+
+        .combo-box:hover::after {
+            color: var(--accent-lilac);
+        }
+
+        /* Enhanced Slider Design */
+        .slider-container {
+            width: 100%;
+            padding: 15px 0 25px 0;
+            position: relative;
+        }
+
+        .slider-value {
+            text-align: right;
+            margin-bottom: 10px;
+            color: var(--accent-lilac-light);
+            font-weight: 600;
+            font-size: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .slider-track {
+            position: relative;
+            height: 6px;
+            background: var(--slider-bg);
+            border-radius: 3px;
+            margin-top: 12px;
+        }
+
+        .slider-progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: var(--accent-lilac);
+            border-radius: 3px;
+            z-index: 1;
+            transition: width 0.2s ease;
+        }
+
+        .range-slider {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            z-index: 3;
+            cursor: pointer;
+        }
+
+        .slider-thumb {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--accent-lilac);
+            box-shadow: 0 0 0 2px rgba(200, 162, 200, 0.3), 0 4px 10px rgba(0, 0, 0, 0.4);
+            border: 2px solid white;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            transition: all 0.2s ease;
+        }
+
+        .slider-thumb:hover {
+            transform: translate(-50%, -50%) scale(1.2);
+            box-shadow: 0 0 0 4px rgba(200, 162, 255, 0.3), 0 6px 15px rgba(0, 0, 0, 0.5);
+            background: var(--accent-lilac-light);
         }
 
         /* Footer */
@@ -688,10 +866,22 @@
                         Advanced targeting system with predictive algorithms. Automatically locks onto targets within your field of view.
                     </div>
                     
-                    <div class="button-group">
-                        <button class="btn btn-primary">
-                            <i class="fas fa-cog"></i> Configure Settings
-                        </button>
+                    <div class="slider-container">
+                        <div class="slider-value">FOV: <span>80°</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 44.4%"></div>
+                            <div class="slider-thumb" style="left: 44.4%"></div>
+                            <input type="range" min="10" max="180" value="80" class="range-slider" id="fov-slider">
+                        </div>
+                    </div>
+                    
+                    <div class="slider-container">
+                        <div class="slider-value">Smoothness: <span>45%</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 45%"></div>
+                            <div class="slider-thumb" style="left: 45%"></div>
+                            <input type="range" min="0" max="100" value="45" class="range-slider" id="smooth-slider">
+                        </div>
                     </div>
                 </div>
                 
@@ -709,10 +899,22 @@
                         Automatically fires when your crosshair is over an enemy. Works with all weapons and configurable delays.
                     </div>
                     
-                    <div class="button-group">
-                        <button class="btn btn-primary">
-                            <i class="fas fa-cog"></i> Configure Settings
-                        </button>
+                    <div class="slider-container">
+                        <div class="slider-value">Delay: <span>25ms</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 25%"></div>
+                            <div class="slider-thumb" style="left: 25%"></div>
+                            <input type="range" min="0" max="100" value="25" class="range-slider" id="delay-slider">
+                        </div>
+                    </div>
+                    
+                    <div class="combo-box">
+                        <select>
+                            <option>All Weapons</option>
+                            <option>Sniper Only</option>
+                            <option>AR Only</option>
+                            <option>Shotgun Only</option>
+                        </select>
                     </div>
                 </div>
                 
@@ -730,10 +932,21 @@
                         Compensates for weapon recoil patterns. Adjust the strength for perfect control.
                     </div>
                     
-                    <div class="button-group">
-                        <button class="btn btn-primary">
-                            <i class="fas fa-cog"></i> Configure Settings
-                        </button>
+                    <div class="slider-container">
+                        <div class="slider-value">Strength: <span>75%</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 75%"></div>
+                            <div class="slider-thumb" style="left: 75%"></div>
+                            <input type="range" min="0" max="100" value="75" class="range-slider" id="recoil-slider">
+                        </div>
+                    </div>
+                    
+                    <div class="combo-box">
+                        <select>
+                            <option>All Weapons</option>
+                            <option>AR Only</option>
+                            <option>SMG Only</option>
+                        </select>
                     </div>
                 </div>
                 
@@ -745,12 +958,370 @@
                         Configure which targets the aimbot should prioritize for maximum efficiency.
                     </div>
                     
+                    <div class="combo-box">
+                        <select>
+                            <option>Closest to Crosshair</option>
+                            <option>Closest Player</option>
+                            <option>Lowest Health</option>
+                            <option>Highest Threat</option>
+                        </select>
+                    </div>
+                    
                     <div class="button-group">
                         <button class="btn btn-primary">
                             <i class="fas fa-save"></i> Save Settings
                         </button>
-                        <button class="btn btn-primary">
+                        <button class="btn btn-secondary">
                             <i class="fas fa-sync-alt"></i> Reset
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="visual-tab">
+            <h2 class="section-title"><i class="fas fa-eye"></i> VISUAL ENHANCEMENTS</h2>
+            <div class="controls-grid">
+                <div class="control-group">
+                    <div class="control-header">
+                        <div class="control-label">Player ESP</div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="control-description">
+                        Display player positions, health, and distance through walls with customizable styles.
+                    </div>
+                    
+                    <div class="combo-box">
+                        <select>
+                            <option>Box Style: 2D Corner</option>
+                            <option>2D Full</option>
+                            <option>3D</option>
+                            <option>Skeleton</option>
+                        </select>
+                    </div>
+                    
+                    <div class="slider-container">
+                        <div class="slider-value">Render Distance: <span>250m</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 50%"></div>
+                            <div class="slider-thumb" style="left: 50%"></div>
+                            <input type="range" min="50" max="500" value="250" class="range-slider" id="render-slider">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <div class="control-header">
+                        <div class="control-label">Item ESP</div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="control-description">
+                        Show important items and weapons through walls. Filter by item type and rarity.
+                    </div>
+                    
+                    <div class="combo-box">
+                        <select>
+                            <option>Show: Weapons & Ammo</option>
+                            <option>Weapons Only</option>
+                            <option>Healing Items</option>
+                            <option>All Items</option>
+                        </select>
+                    </div>
+                    
+                    <div class="slider-container">
+                        <div class="slider-value">Item Render Distance: <span>150m</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 50%"></div>
+                            <div class="slider-thumb" style="left: 50%"></div>
+                            <input type="range" min="10" max="300" value="150" class="range-slider" id="item-slider">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <div class="control-header">
+                        <div class="control-label">Chams & Glow</div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="control-description">
+                        Apply colored glow effects to players and items for enhanced visibility.
+                    </div>
+                    
+                    <div class="slider-container">
+                        <div class="slider-value">Glow Intensity: <span>60%</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 60%"></div>
+                            <div class="slider-thumb" style="left: 60%"></div>
+                            <input type="range" min="0" max="100" value="60" class="range-slider" id="glow-slider">
+                        </div>
+                    </div>
+                    
+                    <div class="combo-box">
+                        <select>
+                            <option>Team: Blue, Enemies: Red</option>
+                            <option>Team: Green, Enemies: Purple</option>
+                            <option>Custom Colors</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <div class="control-header">
+                        <div class="control-label">World Modifiers</div>
+                    </div>
+                    <div class="control-description">
+                        Remove visual clutter and enhance game visibility for competitive advantage.
+                    </div>
+                    
+                    <div class="toggle-container" style="margin-bottom: 15px;">
+                        <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                        <span style="margin-left: 10px;">No Fog</span>
+                    </div>
+                    
+                    <div class="toggle-container" style="margin-bottom: 15px;">
+                        <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                        <span style="margin-left: 10px;">No Blur</span>
+                    </div>
+                    
+                    <div class="button-group">
+                        <button class="btn btn-primary">
+                            <i class="fas fa-brush"></i> Apply Visuals
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="misc-tab">
+            <h2 class="section-title"><i class="fas fa-cogs"></i> MISCELLANEOUS FEATURES</h2>
+            <div class="controls-grid">
+                <div class="control-group">
+                    <div class="control-header">
+                        <div class="control-label">Speed Hack</div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="control-description">
+                        Increase movement speed for faster rotations and escapes.
+                    </div>
+                    
+                    <div class="slider-container">
+                        <div class="slider-value">Speed Multiplier: <span>1.5x</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 50%"></div>
+                            <div class="slider-thumb" style="left: 50%"></div>
+                            <input type="range" min="1" max="3" step="0.1" value="1.5" class="range-slider" id="speed-slider">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <div class="control-header">
+                        <div class="control-label">No Clip</div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="control-description">
+                        Walk through walls and objects for strategic positioning.
+                    </div>
+                    
+                    <div class="button-group">
+                        <button class="btn btn-primary">
+                            <i class="fas fa-key"></i> Bind Key
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <div class="control-header">
+                        <div class="control-label">Auto Loot</div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="control-description">
+                        Automatically collect nearby items matching your preferences.
+                    </div>
+                    
+                    <div class="combo-box">
+                        <select>
+                            <option>Loot: Weapons & Ammo</option>
+                            <option>Healing Items Only</option>
+                            <option>All Items</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <div class="control-header">
+                        <div class="control-label">Radar Hack</div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="control-description">
+                        Show enemy positions on minimap at all times.
+                    </div>
+                    
+                    <div class="slider-container">
+                        <div class="slider-value">Range: <span>200m</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 66.7%"></div>
+                            <div class="slider-thumb" style="left: 66.7%"></div>
+                            <input type="range" min="50" max="500" value="200" class="range-slider" id="radar-slider">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="settings-tab">
+            <h2 class="section-title"><i class="fas fa-sliders-h"></i> SYSTEM SETTINGS</h2>
+            <div class="controls-grid">
+                <div class="control-group">
+                    <div class="control-header">
+                        <div class="control-label">Hotkey Configuration</div>
+                    </div>
+                    <div class="control-description">
+                        Customize key bindings for activating cheat features.
+                    </div>
+                    
+                    <div class="combo-box">
+                        <select>
+                            <option>Menu Toggle: INSERT</option>
+                            <option>Menu Toggle: F1</option>
+                            <option>Menu Toggle: F2</option>
+                        </select>
+                    </div>
+                    
+                    <div class="combo-box">
+                        <select>
+                            <option>Panic Key: F12</option>
+                            <option>Panic Key: DELETE</option>
+                            <option>Panic Key: END</option>
+                        </select>
+                    </div>
+                    
+                    <div class="button-group">
+                        <button class="btn btn-primary">
+                            <i class="fas fa-keyboard"></i> Apply Keybinds
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <div class="control-header">
+                        <div class="control-label">Security Settings</div>
+                    </div>
+                    <div class="control-description">
+                        Configure anti-detection measures and safety features.
+                    </div>
+                    
+                    <div class="toggle-container" style="margin-bottom: 15px;">
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                        <span style="margin-left: 10px;">Stealth Mode</span>
+                    </div>
+                    
+                    <div class="toggle-container" style="margin-bottom: 15px;">
+                        <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                        <span style="margin-left: 10px;">Auto-Updates</span>
+                    </div>
+                    
+                    <div class="button-group">
+                        <button class="btn btn-primary">
+                            <i class="fas fa-shield-alt"></i> Apply Security
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <div class="control-header">
+                        <div class="control-label">Performance Settings</div>
+                    </div>
+                    <div class="control-description">
+                        Optimize cheat performance for your system.
+                    </div>
+                    
+                    <div class="slider-container">
+                        <div class="slider-value">CPU Usage: <span>Medium</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 50%"></div>
+                            <div class="slider-thumb" style="left: 50%"></div>
+                            <input type="range" min="0" max="2" value="1" class="range-slider" id="cpu-slider">
+                        </div>
+                    </div>
+                    
+                    <div class="button-group">
+                        <button class="btn btn-primary">
+                            <i class="fas fa-bolt"></i> Optimize
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <div class="control-header">
+                        <div class="control-label">Profile Management</div>
+                    </div>
+                    <div class="control-description">
+                        Save and load your cheat configurations.
+                    </div>
+                    
+                    <div class="combo-box">
+                        <select>
+                            <option>Select Profile: Default</option>
+                            <option>Sniper Loadout</option>
+                            <option>Aggressive Play</option>
+                            <option>Stealth Configuration</option>
+                        </select>
+                    </div>
+                    
+                    <div class="button-group">
+                        <button class="btn btn-primary">
+                            <i class="fas fa-save"></i> Save Profile
+                        </button>
+                        <button class="btn btn-secondary">
+                            <i class="fas fa-folder-open"></i> Load Profile
                         </button>
                     </div>
                 </div>
@@ -895,6 +1466,84 @@
                 // Show corresponding content
                 const tabId = tab.getAttribute('data-tab');
                 document.getElementById(`${tabId}-tab`).classList.add('active');
+            });
+        });
+        
+        // Update slider values and progress bars
+        document.querySelectorAll('.range-slider').forEach(slider => {
+            // Set initial value
+            const valueDisplay = slider.parentElement.previousElementSibling;
+            const progressBar = slider.previousElementSibling.previousElementSibling;
+            const thumb = slider.previousElementSibling;
+            const max = parseFloat(slider.max);
+            const min = parseFloat(slider.min);
+            const value = parseFloat(slider.value);
+            const percentage = ((value - min) / (max - min)) * 100;
+            
+            if (slider.id.includes('fov') || slider.id.includes('render') || slider.id.includes('item') || slider.id.includes('radar')) {
+                valueDisplay.querySelector('span').textContent = `${value}${slider.id.includes('fov') ? '°' : 'm'}`;
+            } else if (slider.id === 'speed-slider') {
+                valueDisplay.querySelector('span').textContent = `${value}x`;
+            } else if (slider.id === 'cpu-slider') {
+                const levels = ['Low', 'Medium', 'High'];
+                valueDisplay.querySelector('span').textContent = levels[value];
+            } else {
+                valueDisplay.querySelector('span').textContent = `${value}%`;
+            }
+            
+            progressBar.style.width = `${percentage}%`;
+            thumb.style.left = `${percentage}%`;
+            
+            // Update on change
+            slider.addEventListener('input', () => {
+                const currentValue = parseFloat(slider.value);
+                const currentPercentage = ((currentValue - min) / (max - min)) * 100;
+                
+                if (slider.id.includes('fov') || slider.id.includes('render') || slider.id.includes('item') || slider.id.includes('radar')) {
+                    valueDisplay.querySelector('span').textContent = `${currentValue}${slider.id.includes('fov') ? '°' : 'm'}`;
+                } else if (slider.id === 'speed-slider') {
+                    valueDisplay.querySelector('span').textContent = `${currentValue}x`;
+                } else if (slider.id === 'cpu-slider') {
+                    const levels = ['Low', 'Medium', 'High'];
+                    valueDisplay.querySelector('span').textContent = levels[currentValue];
+                } else {
+                    valueDisplay.querySelector('span').textContent = `${currentValue}%`;
+                }
+                
+                progressBar.style.width = `${currentPercentage}%`;
+                thumb.style.left = `${currentPercentage}%`;
+                
+                // Animate progress bar
+                progressBar.style.transition = 'width 0.2s ease';
+                setTimeout(() => {
+                    progressBar.style.transition = '';
+                }, 200);
+            });
+        });
+        
+        // Button animations
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('mousedown', function() {
+                this.style.transform = 'scale(0.95)';
+            });
+            
+            btn.addEventListener('mouseup', function() {
+                this.style.transform = '';
+            });
+            
+            btn.addEventListener('mouseleave', function() {
+                this.style.transform = '';
+            });
+        });
+        
+        // Add smooth hover effect to control groups
+        document.querySelectorAll('.control-group').forEach(group => {
+            group.addEventListener('mouseenter', () => {
+                group.style.transform = 'translateY(-5px)';
+            });
+            
+            group.addEventListener('mouseleave', () => {
+                group.style.transform = '';
             });
         });
     </script>
