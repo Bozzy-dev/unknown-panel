@@ -39,13 +39,13 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
-            overflow: hidden;
+            overflow: auto;
             position: relative;
         }
 
         body::before {
             content: '';
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -58,13 +58,13 @@
         }
 
         .blur-layer {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             z-index: -1;
         }
 
@@ -76,7 +76,7 @@
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
             overflow: hidden;
             border: 1px solid var(--card-border);
-            transform: perspective(1000px) rotateX(1deg);
+            margin: 20px;
         }
 
         /* Header Styles */
@@ -155,6 +155,7 @@
             background: rgba(15, 10, 25, 0.5);
             border-bottom: 1px solid var(--card-border);
             backdrop-filter: blur(4px);
+            flex-wrap: wrap;
         }
 
         .tab {
@@ -165,6 +166,9 @@
             font-weight: 500;
             color: var(--text-secondary);
             letter-spacing: 0.5px;
+            flex-grow: 1;
+            text-align: center;
+            min-width: 120px;
         }
 
         .tab.active {
@@ -231,8 +235,8 @@
         }
 
         .control-group:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), 0 0 0 1px var(--accent-lilac);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3), 0 0 0 1px var(--accent-lilac);
         }
 
         .control-header {
@@ -313,6 +317,7 @@
             display: flex;
             gap: 15px;
             margin-top: 20px;
+            flex-wrap: wrap;
         }
 
         .btn {
@@ -417,13 +422,13 @@
         /* Enhanced Slider Design */
         .slider-container {
             width: 100%;
-            padding: 15px 0;
+            padding: 15px 0 25px 0;
             position: relative;
         }
 
         .slider-value {
             text-align: right;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             color: var(--accent-lilac-light);
             font-weight: 600;
             font-size: 16px;
@@ -432,61 +437,52 @@
             align-items: center;
         }
 
-        .slider-value::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            height: 4px;
-            width: 100%;
+        .slider-track {
+            position: relative;
+            height: 6px;
             background: var(--slider-bg);
-            border-radius: 2px;
-            z-index: 1;
+            border-radius: 3px;
+            margin-top: 12px;
         }
 
         .slider-progress {
             position: absolute;
-            bottom: 0;
+            top: 0;
             left: 0;
-            height: 4px;
+            height: 100%;
             background: var(--accent-lilac);
-            border-radius: 2px;
-            z-index: 2;
-            transition: width 0.3s ease;
+            border-radius: 3px;
+            z-index: 1;
+            transition: width 0.2s ease;
         }
 
         .range-slider {
+            position: absolute;
             width: 100%;
-            height: 8px;
-            background: transparent;
-            border-radius: 4px;
-            outline: none;
-            -webkit-appearance: none;
-            position: relative;
+            height: 100%;
+            opacity: 0;
             z-index: 3;
+            cursor: pointer;
         }
 
-        .range-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
+        .slider-thumb {
+            position: absolute;
             width: 24px;
             height: 24px;
             border-radius: 50%;
             background: var(--accent-lilac);
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: 0 0 0 2px rgba(200, 162, 200, 0.3), 0 4px 10px rgba(0, 0, 0, 0.4);
             border: 2px solid white;
-            transform: translateY(calc(-50% + 2px));
+            top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            transition: all 0.2s ease;
         }
 
-        .range-slider::-webkit-slider-thumb:hover {
-            transform: translateY(calc(-50% + 2px)) scale(1.2);
+        .slider-thumb:hover {
+            transform: translate(-50%, -50%) scale(1.2);
             box-shadow: 0 0 0 4px rgba(200, 162, 255, 0.3), 0 6px 15px rgba(0, 0, 0, 0.5);
             background: var(--accent-lilac-light);
-        }
-
-        .range-slider:active::-webkit-slider-thumb {
-            transform: translateY(calc(-50% + 2px)) scale(1.3);
         }
 
         /* Footer */
@@ -500,6 +496,8 @@
             font-size: 14px;
             color: var(--text-secondary);
             backdrop-filter: blur(4px);
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
         .hotkey {
@@ -534,7 +532,7 @@
 
         /* Floating particles */
         .particles {
-            position: absolute;
+            position: fixed;
             width: 100%;
             height: 100%;
             top: 0;
@@ -556,6 +554,29 @@
             10% { opacity: 1; }
             90% { opacity: 1; }
             100% { transform: translateY(-100vh) translateX(100px) rotate(360deg); opacity: 0; }
+        }
+
+        @media (max-width: 768px) {
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .tab {
+                padding: 15px;
+            }
+            
+            .tab-content {
+                padding: 20px;
+            }
+            
+            .controls-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            footer {
+                flex-direction: column;
+                text-align: center;
+            }
         }
     </style>
 </head>
@@ -603,14 +624,20 @@
                     
                     <div class="slider-container">
                         <div class="slider-value">FOV: <span>80°</span></div>
-                        <div class="slider-progress" style="width: 44.4%"></div>
-                        <input type="range" min="10" max="180" value="80" class="range-slider" id="fov-slider">
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 44.4%"></div>
+                            <div class="slider-thumb" style="left: 44.4%"></div>
+                            <input type="range" min="10" max="180" value="80" class="range-slider" id="fov-slider">
+                        </div>
                     </div>
                     
                     <div class="slider-container">
                         <div class="slider-value">Smoothness: <span>45%</span></div>
-                        <div class="slider-progress" style="width: 45%"></div>
-                        <input type="range" min="0" max="100" value="45" class="range-slider" id="smooth-slider">
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 45%"></div>
+                            <div class="slider-thumb" style="left: 45%"></div>
+                            <input type="range" min="0" max="100" value="45" class="range-slider" id="smooth-slider">
+                        </div>
                     </div>
                 </div>
                 
@@ -630,8 +657,11 @@
                     
                     <div class="slider-container">
                         <div class="slider-value">Delay: <span>25ms</span></div>
-                        <div class="slider-progress" style="width: 25%"></div>
-                        <input type="range" min="0" max="100" value="25" class="range-slider" id="delay-slider">
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 25%"></div>
+                            <div class="slider-thumb" style="left: 25%"></div>
+                            <input type="range" min="0" max="100" value="25" class="range-slider" id="delay-slider">
+                        </div>
                     </div>
                     
                     <div class="combo-box">
@@ -660,8 +690,11 @@
                     
                     <div class="slider-container">
                         <div class="slider-value">Strength: <span>75%</span></div>
-                        <div class="slider-progress" style="width: 75%"></div>
-                        <input type="range" min="0" max="100" value="75" class="range-slider" id="recoil-slider">
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 75%"></div>
+                            <div class="slider-thumb" style="left: 75%"></div>
+                            <input type="range" min="0" max="100" value="75" class="range-slider" id="recoil-slider">
+                        </div>
                     </div>
                     
                     <div class="combo-box">
@@ -730,8 +763,11 @@
                     
                     <div class="slider-container">
                         <div class="slider-value">Render Distance: <span>250m</span></div>
-                        <div class="slider-progress" style="width: 50%"></div>
-                        <input type="range" min="50" max="500" value="250" class="range-slider" id="render-slider">
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 50%"></div>
+                            <div class="slider-thumb" style="left: 50%"></div>
+                            <input type="range" min="50" max="500" value="250" class="range-slider" id="render-slider">
+                        </div>
                     </div>
                 </div>
                 
@@ -760,8 +796,11 @@
                     
                     <div class="slider-container">
                         <div class="slider-value">Item Render Distance: <span>150m</span></div>
-                        <div class="slider-progress" style="width: 50%"></div>
-                        <input type="range" min="10" max="300" value="150" class="range-slider" id="item-slider">
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 50%"></div>
+                            <div class="slider-thumb" style="left: 50%"></div>
+                            <input type="range" min="10" max="300" value="150" class="range-slider" id="item-slider">
+                        </div>
                     </div>
                 </div>
                 
@@ -781,8 +820,11 @@
                     
                     <div class="slider-container">
                         <div class="slider-value">Glow Intensity: <span>60%</span></div>
-                        <div class="slider-progress" style="width: 60%"></div>
-                        <input type="range" min="0" max="100" value="60" class="range-slider" id="glow-slider">
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 60%"></div>
+                            <div class="slider-thumb" style="left: 60%"></div>
+                            <input type="range" min="0" max="100" value="60" class="range-slider" id="glow-slider">
+                        </div>
                     </div>
                     
                     <div class="combo-box">
@@ -887,8 +929,9 @@
         // Update slider values and progress bars
         document.querySelectorAll('.range-slider').forEach(slider => {
             // Set initial value
-            const valueDisplay = slider.previousElementSibling.previousElementSibling;
-            const progressBar = slider.previousElementSibling;
+            const valueDisplay = slider.parentElement.previousElementSibling;
+            const progressBar = slider.previousElementSibling.previousElementSibling;
+            const thumb = slider.previousElementSibling;
             const max = parseInt(slider.max);
             const min = parseInt(slider.min);
             const value = parseInt(slider.value);
@@ -901,6 +944,7 @@
             }
             
             progressBar.style.width = `${percentage}%`;
+            thumb.style.left = `${percentage}%`;
             
             // Update on change
             slider.addEventListener('input', () => {
@@ -914,6 +958,7 @@
                 }
                 
                 progressBar.style.width = `${currentPercentage}%`;
+                thumb.style.left = `${currentPercentage}%`;
                 
                 // Animate progress bar
                 progressBar.style.transition = 'width 0.2s ease';
@@ -944,7 +989,7 @@
         // Add smooth hover effect to control groups
         document.querySelectorAll('.control-group').forEach(group => {
             group.addEventListener('mouseenter', () => {
-                group.style.transform = 'translateY(-8px)';
+                group.style.transform = 'translateY(-5px)';
             });
             
             group.addEventListener('mouseleave', () => {
