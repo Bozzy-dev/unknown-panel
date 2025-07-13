@@ -3,24 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fortnite Cheat Suite | Lilac Grey Theme</title>
+    <title>XPLO Fortnite Suite</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg-dark: #121212;
-            --card-bg: #1e1e1e;
-            --card-border: #2d2d2d;
-            --text-primary: #e6e6e6;
-            --text-secondary: #b0b0b0;
+            --bg-dark: #0d0d12;
+            --card-bg: rgba(30, 30, 42, 0.7);
+            --card-border: rgba(90, 70, 120, 0.3);
+            --text-primary: #e6e6ff;
+            --text-secondary: #b0b0d0;
             --accent-lilac: #c8a2c8;
-            --accent-lilac-light: #d8b9d8;
-            --accent-lilac-dark: #a183a1;
-            --toggle-bg: #3a3a3a;
-            --slider-bg: #333;
-            --slider-thumb: #d0b0d0;
-            --danger: #e74c3c;
-            --success: #2ecc71;
-            --tab-active: rgba(200, 162, 200, 0.2);
+            --accent-lilac-light: #d8b9f8;
+            --accent-lilac-dark: #9173a1;
+            --toggle-bg: #3a3a4a;
+            --slider-bg: #252538;
+            --slider-thumb: #d0b0f0;
+            --danger: #e74c6c;
+            --success: #2ecc91;
+            --tab-active: rgba(200, 162, 220, 0.25);
+            --glass-bg: rgba(20, 15, 30, 0.45);
         }
 
         * {
@@ -31,29 +32,45 @@
         }
 
         body {
-            background: linear-gradient(135deg, var(--bg-dark), #1a1a2e);
+            background: linear-gradient(135deg, #0c0b16, #1a172e, #0c0b16);
             color: var(--text-primary);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
+            overflow: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 30%, rgba(100, 70, 150, 0.15) 0%, transparent 40%),
+                        radial-gradient(circle at 80% 70%, rgba(70, 40, 120, 0.15) 0%, transparent 40%);
+            z-index: -1;
         }
 
         .container {
             width: 100%;
-            max-width: 900px;
-            background: var(--card-bg);
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            max-width: 950px;
+            background: var(--glass-bg);
+            border-radius: 18px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
             overflow: hidden;
             border: 1px solid var(--card-border);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transform: perspective(1000px) rotateX(1deg);
         }
 
         /* Header Styles */
         header {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 20px 30px;
+            background: linear-gradient(to right, rgba(20, 15, 30, 0.7), rgba(40, 25, 60, 0.5));
+            padding: 20px 35px;
             border-bottom: 1px solid var(--card-border);
             display: flex;
             justify-content: space-between;
@@ -66,29 +83,52 @@
             gap: 15px;
         }
 
-        .logo i {
-            font-size: 28px;
-            color: var(--accent-lilac);
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--accent-lilac), #a183d1);
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 15px rgba(200, 162, 200, 0.4);
+            transform: rotate(45deg);
+            transition: all 0.4s ease;
+        }
+
+        .logo-icon i {
+            font-size: 22px;
+            color: white;
+            transform: rotate(-45deg);
+        }
+
+        .logo:hover .logo-icon {
+            transform: rotate(0deg);
+            box-shadow: 0 0 25px rgba(200, 162, 255, 0.6);
         }
 
         .logo h1 {
-            font-size: 24px;
-            font-weight: 600;
+            font-size: 26px;
+            font-weight: 700;
             background: linear-gradient(to right, var(--accent-lilac), var(--accent-lilac-light));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            letter-spacing: 1px;
+            letter-spacing: 1.2px;
+            text-shadow: 0 0 10px rgba(200, 162, 255, 0.3);
         }
 
         .status {
             display: flex;
             align-items: center;
             gap: 10px;
-            padding: 8px 15px;
-            background: rgba(200, 162, 200, 0.1);
-            border-radius: 20px;
+            padding: 8px 20px;
+            background: rgba(200, 162, 220, 0.15);
+            border-radius: 30px;
             border: 1px solid var(--accent-lilac-dark);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 0 10px rgba(160, 110, 220, 0.2);
+            animation: pulse-glow 3s infinite;
         }
 
         .status-dot {
@@ -96,33 +136,34 @@
             height: 12px;
             background: var(--success);
             border-radius: 50%;
-            animation: pulse 2s infinite;
+            box-shadow: 0 0 10px var(--success);
         }
 
-        @keyframes pulse {
-            0% { opacity: 0.7; }
-            50% { opacity: 1; }
-            100% { opacity: 0.7; }
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 10px rgba(160, 110, 220, 0.2); }
+            50% { box-shadow: 0 0 20px rgba(180, 130, 240, 0.4); }
+            100% { box-shadow: 0 0 10px rgba(160, 110, 220, 0.2); }
         }
 
         /* Tab Navigation */
         .tabs {
             display: flex;
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(15, 10, 25, 0.5);
             border-bottom: 1px solid var(--card-border);
         }
 
         .tab {
-            padding: 16px 30px;
+            padding: 18px 35px;
             cursor: pointer;
             transition: all 0.3s ease;
             position: relative;
             font-weight: 500;
             color: var(--text-secondary);
+            letter-spacing: 0.5px;
         }
 
         .tab.active {
-            color: var(--accent-lilac);
+            color: var(--accent-lilac-light);
         }
 
         .tab.active::after {
@@ -134,16 +175,17 @@
             height: 3px;
             background: var(--accent-lilac);
             border-radius: 3px 3px 0 0;
+            box-shadow: 0 0 15px rgba(200, 162, 255, 0.5);
         }
 
         .tab:hover:not(.active) {
-            background: rgba(200, 162, 200, 0.05);
-            color: var(--text-primary);
+            background: rgba(200, 162, 200, 0.1);
+            color: var(--accent-lilac-light);
         }
 
         /* Tab Content */
         .tab-content {
-            padding: 30px;
+            padding: 35px;
             display: none;
         }
 
@@ -152,56 +194,61 @@
         }
 
         .section-title {
-            margin-bottom: 25px;
-            padding-bottom: 10px;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
             border-bottom: 1px solid var(--card-border);
-            font-size: 20px;
+            font-size: 24px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
+            color: var(--accent-lilac-light);
+            text-shadow: 0 0 10px rgba(200, 162, 255, 0.3);
         }
 
         .section-title i {
             color: var(--accent-lilac);
+            font-size: 26px;
         }
 
         .controls-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
         }
 
         .control-group {
-            background: rgba(30, 30, 30, 0.7);
+            background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 10px;
-            padding: 20px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
 
         .control-group:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-            border-color: var(--accent-lilac-dark);
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), 0 0 0 1px var(--accent-lilac);
         }
 
         .control-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .control-label {
-            font-weight: 500;
-            font-size: 16px;
+            font-weight: 600;
+            font-size: 18px;
+            color: var(--accent-lilac-light);
         }
 
         .control-description {
             color: var(--text-secondary);
             font-size: 14px;
-            margin-bottom: 15px;
-            line-height: 1.5;
+            margin-bottom: 20px;
+            line-height: 1.6;
         }
 
         /* Toggle Switch */
@@ -213,8 +260,8 @@
         .toggle-switch {
             position: relative;
             display: inline-block;
-            width: 60px;
-            height: 30px;
+            width: 65px;
+            height: 32px;
         }
 
         .toggle-switch input {
@@ -238,13 +285,14 @@
         .slider:before {
             position: absolute;
             content: "";
-            height: 22px;
-            width: 22px;
+            height: 26px;
+            width: 26px;
             left: 4px;
-            bottom: 4px;
+            bottom: 3px;
             background: #fff;
-            transition: .4s;
+            transition: .4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
             border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
         }
 
         input:checked + .slider {
@@ -252,64 +300,92 @@
         }
 
         input:checked + .slider:before {
-            transform: translateX(30px);
+            transform: translateX(32px);
+            background: white;
         }
 
         /* Buttons */
         .button-group {
             display: flex;
-            gap: 12px;
-            margin-top: 15px;
+            gap: 15px;
+            margin-top: 20px;
         }
 
         .btn {
-            padding: 10px 20px;
-            border-radius: 6px;
+            padding: 12px 25px;
+            border-radius: 8px;
             border: none;
-            font-weight: 500;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            backdrop-filter: blur(5px);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            transform: translateX(100%);
         }
 
         .btn-primary {
-            background: var(--accent-lilac);
-            color: #fff;
+            background: linear-gradient(45deg, var(--accent-lilac), #a183d1);
+            color: white;
+            box-shadow: 0 5px 15px rgba(160, 110, 220, 0.4);
         }
 
         .btn-primary:hover {
-            background: var(--accent-lilac-light);
-            transform: translateY(-2px);
+            background: linear-gradient(45deg, var(--accent-lilac-light), #b193e1);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(180, 130, 240, 0.6);
         }
 
         .btn-secondary {
-            background: transparent;
+            background: rgba(60, 50, 80, 0.5);
             border: 1px solid var(--card-border);
             color: var(--text-primary);
         }
 
         .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(90, 70, 120, 0.4);
             border-color: var(--accent-lilac);
+            transform: translateY(-3px);
         }
 
         /* Combo Box */
         .combo-box {
             position: relative;
             width: 100%;
+            margin-bottom: 15px;
         }
 
         .combo-box select {
             width: 100%;
-            padding: 12px 15px;
-            border-radius: 6px;
+            padding: 14px 20px;
+            border-radius: 10px;
             background: var(--toggle-bg);
             border: 1px solid var(--card-border);
             color: var(--text-primary);
             appearance: none;
             cursor: pointer;
+            font-size: 15px;
+            transition: all 0.3s ease;
         }
 
         .combo-box::after {
@@ -317,60 +393,75 @@
             font-family: 'Font Awesome 6 Free';
             font-weight: 900;
             position: absolute;
-            right: 15px;
+            right: 20px;
             top: 50%;
             transform: translateY(-50%);
             color: var(--text-secondary);
             pointer-events: none;
+            transition: all 0.3s ease;
         }
 
         .combo-box select:focus {
             border-color: var(--accent-lilac);
             outline: none;
+            box-shadow: 0 0 0 2px rgba(200, 162, 255, 0.3);
+        }
+
+        .combo-box:hover::after {
+            color: var(--accent-lilac);
         }
 
         /* Slider */
         .slider-container {
             width: 100%;
-            padding: 10px 0;
+            padding: 15px 0;
         }
 
         .slider-value {
             text-align: right;
-            margin-bottom: 8px;
-            color: var(--accent-lilac);
-            font-weight: 500;
+            margin-bottom: 12px;
+            color: var(--accent-lilac-light);
+            font-weight: 600;
+            font-size: 16px;
+            text-shadow: 0 0 5px rgba(200, 162, 255, 0.3);
         }
 
         .range-slider {
             width: 100%;
-            height: 6px;
+            height: 8px;
             background: var(--slider-bg);
-            border-radius: 3px;
+            border-radius: 4px;
             outline: none;
             -webkit-appearance: none;
+            transition: all 0.3s ease;
         }
 
         .range-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
-            width: 20px;
-            height: 20px;
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
             background: var(--accent-lilac);
             cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 0 0 2px rgba(200, 162, 200, 0.3);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 0 0 2px rgba(200, 162, 200, 0.3), 0 4px 10px rgba(0, 0, 0, 0.4);
+            border: 2px solid white;
         }
 
         .range-slider::-webkit-slider-thumb:hover {
             transform: scale(1.2);
-            box-shadow: 0 0 0 4px rgba(200, 162, 200, 0.3);
+            box-shadow: 0 0 0 4px rgba(200, 162, 255, 0.3), 0 6px 15px rgba(0, 0, 0, 0.5);
+            background: var(--accent-lilac-light);
+        }
+
+        .range-slider:active::-webkit-slider-thumb {
+            transform: scale(1.3);
         }
 
         /* Footer */
         footer {
-            padding: 20px 30px;
-            background: rgba(0, 0, 0, 0.3);
+            padding: 20px 35px;
+            background: linear-gradient(to right, rgba(20, 15, 30, 0.7), rgba(40, 25, 60, 0.5));
             border-top: 1px solid var(--card-border);
             display: flex;
             justify-content: space-between;
@@ -383,35 +474,69 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            padding: 6px 12px;
-            background: rgba(200, 162, 200, 0.1);
-            border-radius: 5px;
+            padding: 8px 16px;
+            background: rgba(200, 162, 220, 0.15);
+            border-radius: 30px;
+            border: 1px solid var(--accent-lilac-dark);
+            backdrop-filter: blur(5px);
         }
 
         .hotkey kbd {
-            background: var(--card-bg);
-            padding: 3px 8px;
-            border-radius: 4px;
+            background: rgba(60, 50, 80, 0.5);
+            padding: 5px 12px;
+            border-radius: 6px;
             border: 1px solid var(--card-border);
+            font-weight: 600;
+            color: var(--accent-lilac-light);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Floating Particles */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(200, 162, 255, 0.15);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(100px) rotate(360deg); opacity: 0; }
         }
 
         /* Animation for tab content */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         .tab-content.active {
-            animation: fadeIn 0.4s ease forwards;
+            animation: fadeIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
     </style>
 </head>
 <body>
+    <div class="particles" id="particles"></div>
+    
     <div class="container">
         <header>
             <div class="logo">
-                <i class="fas fa-ghost"></i>
-                <h1>SPECTRE FORTNITE SUITE</h1>
+                <div class="logo-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h1>XPLO FORTNITE SUITE</h1>
             </div>
             <div class="status">
                 <div class="status-dot"></div>
@@ -427,11 +552,11 @@
         </div>
 
         <div class="tab-content active" id="aim-tab">
-            <h2 class="section-title"><i class="fas fa-crosshairs"></i> Aim Enhancement</h2>
+            <h2 class="section-title"><i class="fas fa-crosshairs"></i> AIM ENHANCEMENT</h2>
             <div class="controls-grid">
                 <div class="control-group">
                     <div class="control-header">
-                        <div class="control-label">Aimbot</div>
+                        <div class="control-label">Precision Aimbot</div>
                         <div class="toggle-container">
                             <label class="toggle-switch">
                                 <input type="checkbox" checked>
@@ -440,17 +565,17 @@
                         </div>
                     </div>
                     <div class="control-description">
-                        Automatically locks onto targets within field of view. Adjust settings below for precision control.
+                        Advanced targeting system with predictive algorithms. Automatically locks onto targets within your field of view.
                     </div>
                     
                     <div class="slider-container">
                         <div class="slider-value">FOV: 80°</div>
-                        <input type="range" min="10" max="180" value="80" class="range-slider">
+                        <input type="range" min="10" max="180" value="80" class="range-slider" id="fov-slider">
                     </div>
                     
                     <div class="slider-container">
                         <div class="slider-value">Smoothness: 45%</div>
-                        <input type="range" min="0" max="100" value="45" class="range-slider">
+                        <input type="range" min="0" max="100" value="45" class="range-slider" id="smooth-slider">
                     </div>
                 </div>
                 
@@ -465,12 +590,12 @@
                         </div>
                     </div>
                     <div class="control-description">
-                        Automatically fires when crosshair is over an enemy. Works with all weapons.
+                        Automatically fires when your crosshair is over an enemy. Works with all weapons and configurable delays.
                     </div>
                     
                     <div class="slider-container">
                         <div class="slider-value">Delay: 25ms</div>
-                        <input type="range" min="0" max="100" value="25" class="range-slider">
+                        <input type="range" min="0" max="100" value="25" class="range-slider" id="delay-slider">
                     </div>
                     
                     <div class="combo-box">
@@ -494,12 +619,12 @@
                         </div>
                     </div>
                     <div class="control-description">
-                        Compensates for weapon recoil patterns. Adjust the strength below.
+                        Compensates for weapon recoil patterns. Adjust the strength for perfect control.
                     </div>
                     
                     <div class="slider-container">
                         <div class="slider-value">Strength: 75%</div>
-                        <input type="range" min="0" max="100" value="75" class="range-slider">
+                        <input type="range" min="0" max="100" value="75" class="range-slider" id="recoil-slider">
                     </div>
                     
                     <div class="combo-box">
@@ -513,13 +638,13 @@
                 
                 <div class="control-group">
                     <div class="control-header">
-                        <div class="control-label">Target Priority</div>
+                        <div class="control-label">Target Selection</div>
                     </div>
                     <div class="control-description">
-                        Configure which targets the aimbot should prioritize.
+                        Configure which targets the aimbot should prioritize for maximum efficiency.
                     </div>
                     
-                    <div class="combo-box" style="margin-bottom: 15px;">
+                    <div class="combo-box">
                         <select>
                             <option>Closest to Crosshair</option>
                             <option>Closest Player</option>
@@ -533,7 +658,7 @@
                             <i class="fas fa-save"></i> Save Settings
                         </button>
                         <button class="btn btn-secondary">
-                            <i class="fas fa-undo"></i> Reset
+                            <i class="fas fa-sync-alt"></i> Reset
                         </button>
                     </div>
                 </div>
@@ -541,11 +666,11 @@
         </div>
 
         <div class="tab-content" id="visual-tab">
-            <h2 class="section-title"><i class="fas fa-eye"></i> Visual Enhancements</h2>
+            <h2 class="section-title"><i class="fas fa-eye"></i> VISUAL ENHANCEMENTS</h2>
             <div class="controls-grid">
                 <div class="control-group">
                     <div class="control-header">
-                        <div class="control-label">ESP Boxes</div>
+                        <div class="control-label">Player ESP</div>
                         <div class="toggle-container">
                             <label class="toggle-switch">
                                 <input type="checkbox" checked>
@@ -554,35 +679,21 @@
                         </div>
                     </div>
                     <div class="control-description">
-                        Display boxes around players with customizable colors.
+                        Display player positions, health, and distance through walls with customizable styles.
                     </div>
                     
-                    <div class="combo-box" style="margin-bottom: 15px;">
+                    <div class="combo-box">
                         <select>
                             <option>Box Style: 2D Corner</option>
                             <option>2D Full</option>
                             <option>3D</option>
+                            <option>Skeleton</option>
                         </select>
-                    </div>
-                </div>
-                
-                <div class="control-group">
-                    <div class="control-header">
-                        <div class="control-label">Player Glow</div>
-                        <div class="toggle-container">
-                            <label class="toggle-switch">
-                                <input type="checkbox">
-                                <span class="slider"></span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="control-description">
-                        Highlight players with a colored glow effect.
                     </div>
                     
                     <div class="slider-container">
-                        <div class="slider-value">Opacity: 60%</div>
-                        <input type="range" min="0" max="100" value="60" class="range-slider">
+                        <div class="slider-value">Render Distance: 250m</div>
+                        <input type="range" min="50" max="500" value="250" class="range-slider" id="render-slider">
                     </div>
                 </div>
                 
@@ -597,10 +708,10 @@
                         </div>
                     </div>
                     <div class="control-description">
-                        Show important items and weapons through walls.
+                        Show important items and weapons through walls. Filter by item type and rarity.
                     </div>
                     
-                    <div class="combo-box" style="margin-bottom: 15px;">
+                    <div class="combo-box">
                         <select>
                             <option>Show: Weapons & Ammo</option>
                             <option>Weapons Only</option>
@@ -608,11 +719,16 @@
                             <option>All Items</option>
                         </select>
                     </div>
+                    
+                    <div class="slider-container">
+                        <div class="slider-value">Item Render Distance: 150m</div>
+                        <input type="range" min="10" max="300" value="150" class="range-slider" id="item-slider">
+                    </div>
                 </div>
                 
                 <div class="control-group">
                     <div class="control-header">
-                        <div class="control-label">No Fog</div>
+                        <div class="control-label">Chams & Glow</div>
                         <div class="toggle-container">
                             <label class="toggle-switch">
                                 <input type="checkbox">
@@ -621,12 +737,50 @@
                         </div>
                     </div>
                     <div class="control-description">
-                        Remove fog and atmospheric effects for clearer vision.
+                        Apply colored glow effects to players and items for enhanced visibility.
+                    </div>
+                    
+                    <div class="slider-container">
+                        <div class="slider-value">Glow Intensity: 60%</div>
+                        <input type="range" min="0" max="100" value="60" class="range-slider" id="glow-slider">
+                    </div>
+                    
+                    <div class="combo-box">
+                        <select>
+                            <option>Team: Blue, Enemies: Red</option>
+                            <option>Team: Green, Enemies: Purple</option>
+                            <option>Custom Colors</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <div class="control-header">
+                        <div class="control-label">World Modifiers</div>
+                    </div>
+                    <div class="control-description">
+                        Remove visual clutter and enhance game visibility for competitive advantage.
+                    </div>
+                    
+                    <div class="toggle-container" style="margin-bottom: 15px;">
+                        <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                        <span style="margin-left: 10px;">No Fog</span>
+                    </div>
+                    
+                    <div class="toggle-container" style="margin-bottom: 15px;">
+                        <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                        <span style="margin-left: 10px;">No Blur</span>
                     </div>
                     
                     <div class="button-group">
                         <button class="btn btn-primary">
-                            <i class="fas fa-save"></i> Apply Changes
+                            <i class="fas fa-brush"></i> Apply Visuals
                         </button>
                     </div>
                 </div>
@@ -636,13 +790,44 @@
         <footer>
             <div class="hotkey">
                 <span>MENU TOGGLE:</span>
-                <kbd>F1</kbd>
+                <kbd>INSERT</kbd>
             </div>
-            <div>SPECTRE SUITE v2.4.1 | FORTNITE SEASON 5</div>
+            <div>XPLO SUITE v3.1.5 | FORTNITE SEASON 5</div>
+            <div class="hotkey">
+                <span>PANIC KEY:</span>
+                <kbd>F12</kbd>
+            </div>
         </footer>
     </div>
 
     <script>
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 20;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random properties
+                const size = Math.random() * 8 + 2;
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                const delay = Math.random() * 15;
+                const duration = 15 + Math.random() * 10;
+                
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${posX}%`;
+                particle.style.top = `${posY}%`;
+                particle.style.animationDelay = `${delay}s`;
+                particle.style.animationDuration = `${duration}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
         // Tab functionality
         document.querySelectorAll('.tab').forEach(tab => {
             tab.addEventListener('click', () => {
@@ -663,21 +848,40 @@
         document.querySelectorAll('.range-slider').forEach(slider => {
             // Set initial value
             const valueDisplay = slider.previousElementSibling;
-            valueDisplay.textContent = `${valueDisplay.textContent.split(':')[0]}: ${slider.value}${slider.id === 'fov' ? '°' : '%'}`;
+            valueDisplay.textContent = `${valueDisplay.textContent.split(':')[0]}: ${slider.value}${slider.id.includes('fov') || slider.id.includes('render') || slider.id.includes('item') ? '' : '%'}`;
             
             // Update on change
             slider.addEventListener('input', () => {
-                valueDisplay.textContent = `${valueDisplay.textContent.split(':')[0]}: ${slider.value}${slider.id === 'fov' ? '°' : '%'}`;
+                valueDisplay.textContent = `${valueDisplay.textContent.split(':')[0]}: ${slider.value}${slider.id.includes('fov') || slider.id.includes('render') || slider.id.includes('item') ? '' : '%'}`;
             });
         });
         
         // Button animations
         document.querySelectorAll('.btn').forEach(btn => {
-            btn.addEventListener('click', function() {
+            btn.addEventListener('mousedown', function() {
                 this.style.transform = 'scale(0.95)';
-                setTimeout(() => {
-                    this.style.transform = '';
-                }, 200);
+            });
+            
+            btn.addEventListener('mouseup', function() {
+                this.style.transform = '';
+            });
+            
+            btn.addEventListener('mouseleave', function() {
+                this.style.transform = '';
+            });
+        });
+        
+        // Initialize particles
+        createParticles();
+        
+        // Add smooth hover effect to control groups
+        document.querySelectorAll('.control-group').forEach(group => {
+            group.addEventListener('mouseenter', () => {
+                group.style.transform = 'translateY(-8px) scale(1.01)';
+            });
+            
+            group.addEventListener('mouseleave', () => {
+                group.style.transform = '';
             });
         });
     </script>
