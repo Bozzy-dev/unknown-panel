@@ -29,6 +29,7 @@
             --success: #2ecc91;
             --tab-active: rgba(200, 162, 220, 0.25);
             --glass-bg: rgba(20, 15, 30, 0.65);
+            --tooltip-bg: rgba(35, 30, 45, 0.9);
         }
 
         body {
@@ -264,41 +265,49 @@
             cursor: help;
             position: relative;
             font-size: 16px;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
         }
 
-        .tooltip-icon:hover::after {
-            content: attr(data-tooltip);
+        .tooltip-icon:hover {
+            color: var(--accent-lilac);
+            background: rgba(200, 162, 200, 0.1);
+        }
+
+        .tooltip-text {
             position: absolute;
             bottom: 125%;
             left: 50%;
-            transform: translateX(-50%);
-            background: rgba(25, 23, 36, 0.95);
+            transform: translateX(-50%) translateY(10px);
+            background: var(--tooltip-bg);
             border: 1px solid var(--accent-lilac);
-            border-radius: 8px;
-            padding: 12px;
-            width: 250px;
+            border-radius: 12px;
+            padding: 15px;
+            width: 280px;
             color: var(--text-primary);
             font-size: 14px;
             font-weight: normal;
             z-index: 100;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             text-align: center;
             opacity: 0;
-            transition: opacity 0.3s ease;
-            pointer-events: none;
+            visibility: hidden;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-origin: bottom center;
+            line-height: 1.5;
         }
 
-        .tooltip-icon:hover::after {
+        .tooltip-icon:hover .tooltip-text {
             opacity: 1;
-        }
-
-        .control-description {
-            color: var(--text-secondary);
-            font-size: 14px;
-            margin-bottom: 20px;
-            line-height: 1.6;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
         }
 
         /* Toggle Switch */
@@ -671,7 +680,10 @@
                     <div class="control-header">
                         <div class="control-label">
                             Aimbot
-                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Enable or disable the aimbot feature"></i>
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Enable or disable the aimbot feature</div>
+                            </div>
                         </div>
                         <div class="toggle-container">
                             <label class="toggle-switch">
@@ -684,7 +696,10 @@
                     <div class="control-header">
                         <div class="control-label">
                             Sticky Aim
-                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Stick to target when locked on"></i>
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Stick to target when locked on</div>
+                            </div>
                         </div>
                         <div class="toggle-container">
                             <label class="toggle-switch">
@@ -705,7 +720,10 @@
                     <div class="control-header">
                         <div class="control-label">
                             Prediction
-                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Predict target movement"></i>
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Predict target movement</div>
+                            </div>
                         </div>
                         <div class="toggle-container">
                             <label class="toggle-switch">
@@ -718,7 +736,10 @@
                     <div class="control-header">
                         <div class="control-label">
                             Visible Check
-                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Only target visible players"></i>
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Only target visible players</div>
+                            </div>
                         </div>
                         <div class="toggle-container">
                             <label class="toggle-switch">
@@ -731,7 +752,10 @@
                     <div class="control-header">
                         <div class="control-label">
                             Ignore Downed
-                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Ignore downed players"></i>
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Ignore downed players</div>
+                            </div>
                         </div>
                         <div class="toggle-container">
                             <label class="toggle-switch">
@@ -744,7 +768,10 @@
                     <div class="control-header">
                         <div class="control-label">
                             Render FOV
-                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Show aimbot field of view circle"></i>
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Show aimbot field of view circle</div>
+                            </div>
                         </div>
                         <div class="toggle-container">
                             <label class="toggle-switch">
@@ -786,7 +813,10 @@
                     <div class="control-header">
                         <div class="control-label">
                             Triggerbot
-                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Automatically fire when target is in crosshair"></i>
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Automatically fire when target is in crosshair</div>
+                            </div>
                         </div>
                         <div class="toggle-container">
                             <label class="toggle-switch">
@@ -799,7 +829,10 @@
                     <div class="control-header">
                         <div class="control-label">
                             Shotgun Only
-                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Only activate triggerbot with shotguns"></i>
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Only activate triggerbot with shotguns</div>
+                            </div>
                         </div>
                         <div class="toggle-container">
                             <label class="toggle-switch">
@@ -812,7 +845,10 @@
                     <div class="control-header">
                         <div class="control-label">
                             Ignore Keybind
-                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Triggerbot works without holding key"></i>
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Triggerbot works without holding key</div>
+                            </div>
                         </div>
                         <div class="toggle-container">
                             <label class="toggle-switch">
@@ -843,7 +879,10 @@
                     <div class="control-header">
                         <div class="control-label">
                             Humanization
-                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Add human-like imperfections to aim"></i>
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Add human-like imperfections to aim</div>
+                            </div>
                         </div>
                         <div class="toggle-container">
                             <label class="toggle-switch">
@@ -882,7 +921,10 @@
                     <div class="control-header">
                         <div class="control-label">
                             Username
-                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Display player usernames"></i>
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Display player usernames</div>
+                            </div>
                         </div>
                         <div class="toggle-container">
                             <label class="toggle-switch">
@@ -895,7 +937,10 @@
                     <div class="control-header">
                         <div class="control-label">
                             Team ID Username
-                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Show team ID in username"></i>
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Show team ID in username</div>
+                            </div>
                         </div>
                         <div class="toggle-container">
                             <label class="toggle-switch">
@@ -908,7 +953,10 @@
                     <div class="control-header">
                         <div class="control-label">
                             Rank
-                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Display player ranks"></i>
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Display player ranks</div>
+                            </div>
                         </div>
                         <div class="toggle-container">
                             <label class="toggle-switch">
@@ -921,7 +969,10 @@
                     <div class="control-header">
                         <div class="control-label">
                             Distance
-                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Show distance to players"></i>
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Show distance to players</div>
+                            </div>
                         </div>
                         <div class="toggle-container">
                             <label class="toggle-switch">
@@ -934,7 +985,10 @@
                     <div class="control-header">
                         <div class="control-label">
                             Held Weapon
-                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Show currently held weapon"></i>
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Show currently held weapon</div>
+                            </div>
                         </div>
                         <div class="toggle-container">
                             <label class="toggle-switch">
@@ -947,7 +1001,10 @@
                     <div class="control-header">
                         <div class="control-label">
                             Platform
-                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Show player platform (PC/Console)"></i>
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Show player platform (PC/Console)</div>
+                            </div>
                         </div>
                         <div class="toggle-container">
                             <label class="toggle-switch">
@@ -960,7 +1017,10 @@
                     <div class="control-header">
                         <div class="control-label">
                             Spectators
-                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Show spectator count"></i>
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Show spectator count</div>
+                            </div>
                         </div>
                         <div class="toggle-container">
                             <label class="toggle-switch">
@@ -973,7 +1033,10 @@
                     <div class="control-header">
                         <div class="control-label">
                             Skeletons
-                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Display player skeletons"></i>
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Display player skeletons</div>
+                            </div>
                         </div>
                         <div class="toggle-container">
                             <label class="toggle-switch">
@@ -994,7 +1057,10 @@
                     <div class="control-header">
                         <div class="control-label">
                             Skeleton Outline
-                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Add outline to skeletons"></i>
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Add outline to skeletons</div>
+                            </div>
                         </div>
                         <div class="toggle-container">
                             <label class="toggle-switch">
@@ -1018,7 +1084,10 @@
                     <div class="control-header">
                         <div class="control-label">
                             Box
-                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Display boxes around players"></i>
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Display boxes around players</div>
+                            </div>
                         </div>
                         <div class="toggle-container">
                             <label class="toggle-switch">
@@ -1031,7 +1100,10 @@
                     <div class="control-header">
                         <div class="control-label">
                             Filled Box
-                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Fill player boxes with color"></i>
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Fill player boxes with color</div>
+                            </div>
                         </div>
                         <div class="toggle-container">
                             <label class="toggle-switch">
@@ -1052,7 +1124,10 @@
                     <div class="control-header">
                         <div class="control-label">
                             Box Outline
-                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Add outline to player boxes"></i>
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Add outline to player boxes</div>
+                            </div>
                         </div>
                         <div class="toggle-container">
                             <label class="toggle-switch">
@@ -1065,7 +1140,10 @@
                     <div class="control-header">
                         <div class="control-label">
                             Text Outline
-                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Add outline to text elements"></i>
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Add outline to text elements</div>
+                            </div>
                         </div>
                         <div class="toggle-container">
                             <label class="toggle-switch">
@@ -1096,7 +1174,10 @@
                     <div class="control-header">
                         <div class="control-label">
                             vSync
-                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Enable vertical sync for visuals"></i>
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Enable vertical sync for visuals</div>
+                            </div>
                         </div>
                         <div class="toggle-container">
                             <label class="toggle-switch">
@@ -1109,7 +1190,10 @@
                     <div class="control-header">
                         <div class="control-label">
                             Player TP
-                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Teleport to player position"></i>
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Teleport to player position</div>
+                            </div>
                         </div>
                         <div class="toggle-container">
                             <label class="toggle-switch">
@@ -1122,7 +1206,10 @@
                     <div class="control-header">
                         <div class="control-label">
                             Snap Lines
-                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Draw lines to players"></i>
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Draw lines to players</div>
+                            </div>
                         </div>
                         <div class="toggle-container">
                             <label class="toggle-switch">
@@ -1143,7 +1230,10 @@
                     <div class="control-header">
                         <div class="control-label">
                             Outline Lines
-                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Add outline to snap lines"></i>
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Add outline to snap lines</div>
+                            </div>
                         </div>
                         <div class="toggle-container">
                             <label class="toggle-switch">
@@ -1165,7 +1255,10 @@
                     <div class="control-header">
                         <div class="control-label">
                             World ESP
-                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Show world items"></i>
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Show world items</div>
+                            </div>
                         </div>
                         <div class="toggle-container">
                             <label class="toggle-switch">
@@ -1187,7 +1280,10 @@
                     <div class="control-header">
                         <div class="control-label">
                             ESP Down Check
-                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Check for downed players in ESP"></i>
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Check for downed players in ESP</div>
+                            </div>
                         </div>
                         <div class="toggle-container">
                             <label class="toggle-switch">
@@ -1200,7 +1296,10 @@
                     <div class="control-header">
                         <div class="control-label">
                             Aim Down Check
-                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Check for downed players in aimbot"></i>
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Check for downed players in aimbot</div>
+                            </div>
                         </div>
                         <div class="toggle-container">
                             <label class="toggle-switch">
@@ -1221,7 +1320,10 @@
                     <div class="control-header">
                         <div class="control-label">
                             Radar
-                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Enable the radar feature"></i>
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Enable the radar feature</div>
+                            </div>
                         </div>
                         <div class="toggle-container">
                             <label class="toggle-switch">
@@ -1243,7 +1345,10 @@
                     <div class="control-header">
                         <div class="control-label">
                             Show Distance
-                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Show distance on radar"></i>
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Show distance on radar</div>
+                            </div>
                         </div>
                         <div class="toggle-container">
                             <label class="toggle-switch">
@@ -1256,7 +1361,10 @@
                     <div class="control-header">
                         <div class="control-label">
                             Show Platform
-                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Show platform on radar"></i>
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Show platform on radar</div>
+                            </div>
                         </div>
                         <div class="toggle-container">
                             <label class="toggle-switch">
@@ -1269,7 +1377,10 @@
                     <div class="control-header">
                         <div class="control-label">
                             Show Team
-                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Show team members on radar"></i>
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Show team members on radar</div>
+                            </div>
                         </div>
                         <div class="toggle-container">
                             <label class="toggle-switch">
@@ -1282,7 +1393,10 @@
                     <div class="control-header">
                         <div class="control-label">
                             Team ID Radar
-                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Show team ID on radar"></i>
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Show team ID on radar</div>
+                            </div>
                         </div>
                         <div class="toggle-container">
                             <label class="toggle-switch">
@@ -1303,7 +1417,10 @@
                     <div class="control-header">
                         <div class="control-label">
                             Weapon Config
-                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Enable weapon-specific settings"></i>
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Enable weapon-specific settings</div>
+                            </div>
                         </div>
                         <div class="toggle-container">
                             <label class="toggle-switch">
