@@ -68,231 +68,16 @@
             z-index: -1;
         }
 
-        .login-container {
-            width: 100%;
-            max-width: 450px;
-            background: var(--glass-bg);
-            border-radius: 18px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
-            overflow: hidden;
-            border: 1px solid var(--card-border);
-            padding: 40px;
-            text-align: center;
-            position: relative;
-            z-index: 2;
-            transition: all 0.5s ease;
-        }
-
         .main-container {
             width: 100%;
-            max-width: 950px;
+            max-width: 1100px;
             background: var(--glass-bg);
             border-radius: 18px;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
             overflow: hidden;
             border: 1px solid var(--card-border);
-            display: none;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.5s ease;
-        }
-
-        .login-header {
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        .login-logo {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .login-logo-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--accent-lilac), #a183d1);
-            border-radius: 15px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 0 25px rgba(200, 162, 200, 0.5);
-            transform: rotate(45deg);
-            transition: all 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-        }
-
-        .login-logo-icon i {
-            font-size: 28px;
-            color: white;
-            transform: rotate(-45deg);
-        }
-
-        .login-logo:hover .login-logo-icon {
-            transform: rotate(0deg);
-            box-shadow: 0 0 35px rgba(200, 162, 255, 0.7);
-        }
-
-        .login-logo h1 {
-            font-size: 32px;
-            font-weight: 700;
-            background: linear-gradient(to right, var(--accent-lilac), var(--accent-lilac-light));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            letter-spacing: 1.5px;
-            text-shadow: 0 0 15px rgba(200, 162, 255, 0.4);
-        }
-
-        .login-subtitle {
-            color: var(--text-secondary);
-            font-size: 18px;
-            margin-top: 10px;
-        }
-
-        .input-group {
-            position: relative;
-            margin-bottom: 30px;
-        }
-
-        .license-input {
-            width: 100%;
-            padding: 16px 20px;
-            background: rgba(30, 25, 45, 0.7);
-            border: 2px solid var(--card-border);
-            border-radius: 12px;
-            color: var(--text-primary);
-            font-size: 16px;
-            transition: all 0.3s ease;
-            outline: none;
-            text-align: center;
-            letter-spacing: 1px;
-        }
-
-        .license-input:focus {
-            border-color: var(--accent-lilac);
-            box-shadow: 0 0 0 3px rgba(200, 162, 255, 0.3);
-        }
-
-        .license-input::placeholder {
-            color: var(--text-secondary);
-            letter-spacing: normal;
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 16px;
-            border-radius: 12px;
-            border: none;
-            background: linear-gradient(45deg, var(--accent-lilac), #a183d1);
-            color: white;
-            font-size: 18px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(160, 110, 220, 0.4);
-            letter-spacing: 1px;
-        }
-
-        .submit-btn:hover {
-            background: linear-gradient(45deg, var(--accent-lilac-light), #b193e1);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(180, 130, 240, 0.6);
-        }
-
-        .submit-btn:active {
-            transform: translateY(1px);
-        }
-
-        .submit-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transform: translateX(-100%);
-            transition: transform 0.6s ease;
-        }
-
-        .submit-btn:hover::before {
-            transform: translateX(100%);
-        }
-
-        .message {
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 10px;
-            font-weight: 500;
-            display: none;
-            animation: fadeIn 0.4s ease;
-        }
-
-        .error {
-            background: rgba(231, 76, 60, 0.2);
-            border: 1px solid var(--danger);
-            color: #ff9d9d;
-        }
-
-        .success {
-            background: rgba(46, 204, 113, 0.2);
-            border: 1px solid var(--success);
-            color: #a8ffc8;
-        }
-
-        .checkmark {
-            display: inline-block;
-            width: 22px;
-            height: 22px;
-            background: var(--success);
-            border-radius: 50%;
-            margin-right: 10px;
-            position: relative;
-            animation: checkmarkScale 0.5s ease;
-        }
-
-        .checkmark::after {
-            content: '';
-            position: absolute;
-            left: 8px;
-            top: 4px;
-            width: 5px;
-            height: 10px;
-            border: solid white;
-            border-width: 0 3px 3px 0;
-            transform: rotate(45deg);
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            20%, 60% { transform: translateX(-10px); }
-            40%, 80% { transform: translateX(10px); }
-        }
-
-        @keyframes checkmarkScale {
-            0% { transform: scale(0); }
-            70% { transform: scale(1.2); }
-            100% { transform: scale(1); }
-        }
-
-        .shake {
-            animation: shake 0.4s ease;
-        }
-
-        .footer-note {
-            margin-top: 30px;
-            color: var(--text-secondary);
-            font-size: 14px;
-            text-align: center;
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* Header Styles */
@@ -412,6 +197,8 @@
         .tab-content {
             padding: 35px;
             display: none;
+            max-height: 600px;
+            overflow-y: auto;
         }
 
         .tab-content.active {
@@ -448,6 +235,7 @@
             padding: 25px;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            position: relative;
         }
 
         .control-group:hover {
@@ -466,6 +254,44 @@
             font-weight: 600;
             font-size: 18px;
             color: var(--accent-lilac-light);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tooltip-icon {
+            color: var(--text-secondary);
+            cursor: help;
+            position: relative;
+            font-size: 16px;
+        }
+
+        .tooltip-icon:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(25, 23, 36, 0.95);
+            border: 1px solid var(--accent-lilac);
+            border-radius: 8px;
+            padding: 12px;
+            width: 250px;
+            color: var(--text-primary);
+            font-size: 14px;
+            font-weight: normal;
+            z-index: 100;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .tooltip-icon:hover::after {
+            opacity: 1;
         }
 
         .control-description {
@@ -701,6 +527,31 @@
             background: var(--accent-lilac-light);
         }
 
+        /* Color Picker */
+        .color-picker {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .color-label {
+            min-width: 120px;
+        }
+
+        .color-preview {
+            width: 30px;
+            height: 30px;
+            border-radius: 6px;
+            border: 1px solid var(--card-border);
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .color-preview:hover {
+            transform: scale(1.1);
+        }
+
         /* Footer */
         footer {
             padding: 20px 35px;
@@ -763,14 +614,6 @@
         }
 
         @media (max-width: 768px) {
-            .login-container {
-                padding: 30px 20px;
-            }
-            
-            .login-logo h1 {
-                font-size: 26px;
-            }
-            
             .tabs {
                 flex-direction: column;
             }
@@ -798,36 +641,6 @@
     <div class="blur-layer"></div>
     <div class="particles" id="particles"></div>
     
-    <div class="login-container" id="loginContainer">
-        <div class="login-header">
-            <div class="login-logo">
-                <div class="login-logo-icon">
-                    <i class="fas fa-bolt"></i>
-                </div>
-                <h1>XPLO FORTNITE SUITE</h1>
-            </div>
-            <div class="login-subtitle">Enter your license key to access premium features</div>
-        </div>
-        
-        <div class="input-group">
-            <input type="password" class="license-input" id="licenseKey" placeholder="Enter License Key" autocomplete="off">
-        </div>
-        
-        <button class="submit-btn" id="submitBtn">UNLOCK FEATURES</button>
-        
-        <div class="message error" id="errorMessage">
-            <i class="fas fa-exclamation-circle"></i> Invalid license key! Please try again.
-        </div>
-        
-        <div class="message success" id="successMessage">
-            <div class="checkmark"></div> License verified! Access granted.
-        </div>
-        
-        <div class="footer-note">
-            <i class="fas fa-shield-alt"></i> Your credentials are encrypted and never stored
-        </div>
-    </div>
-    
     <div class="main-container" id="mainContainer">
         <header>
             <div class="logo">
@@ -843,18 +656,23 @@
         </header>
 
         <div class="tabs">
-            <div class="tab active" data-tab="aim">AIM ASSIST</div>
+            <div class="tab active" data-tab="aim">AIMBOT</div>
             <div class="tab" data-tab="visual">VISUALS</div>
-            <div class="tab" data-tab="misc">MISC</div>
-            <div class="tab" data-tab="settings">SETTINGS</div>
+            <div class="tab" data-tab="radar">RADAR</div>
+            <div class="tab" data-tab="weapon">WEAPON CFG</div>
+            <div class="tab" data-tab="colors">COLORS</div>
         </div>
 
+        <!-- AIMBOT TAB -->
         <div class="tab-content active" id="aim-tab">
-            <h2 class="section-title"><i class="fas fa-crosshairs"></i> AIM ENHANCEMENT</h2>
+            <h2 class="section-title"><i class="fas fa-crosshairs"></i> AIMBOT SETTINGS</h2>
             <div class="controls-grid">
                 <div class="control-group">
                     <div class="control-header">
-                        <div class="control-label">Precision Aimbot</div>
+                        <div class="control-label">
+                            Aimbot
+                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Enable or disable the aimbot feature"></i>
+                        </div>
                         <div class="toggle-container">
                             <label class="toggle-switch">
                                 <input type="checkbox" checked>
@@ -862,32 +680,12 @@
                             </label>
                         </div>
                     </div>
-                    <div class="control-description">
-                        Advanced targeting system with predictive algorithms. Automatically locks onto targets within your field of view.
-                    </div>
                     
-                    <div class="slider-container">
-                        <div class="slider-value">FOV: <span>80°</span></div>
-                        <div class="slider-track">
-                            <div class="slider-progress" style="width: 44.4%"></div>
-                            <div class="slider-thumb" style="left: 44.4%"></div>
-                            <input type="range" min="10" max="180" value="80" class="range-slider" id="fov-slider">
-                        </div>
-                    </div>
-                    
-                    <div class="slider-container">
-                        <div class="slider-value">Smoothness: <span>45%</span></div>
-                        <div class="slider-track">
-                            <div class="slider-progress" style="width: 45%"></div>
-                            <div class="slider-thumb" style="left: 45%"></div>
-                            <input type="range" min="0" max="100" value="45" class="range-slider" id="smooth-slider">
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="control-group">
                     <div class="control-header">
-                        <div class="control-label">Trigger Bot</div>
+                        <div class="control-label">
+                            Sticky Aim
+                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Stick to target when locked on"></i>
+                        </div>
                         <div class="toggle-container">
                             <label class="toggle-switch">
                                 <input type="checkbox">
@@ -895,32 +693,20 @@
                             </label>
                         </div>
                     </div>
-                    <div class="control-description">
-                        Automatically fires when your crosshair is over an enemy. Works with all weapons and configurable delays.
-                    </div>
-                    
-                    <div class="slider-container">
-                        <div class="slider-value">Delay: <span>25ms</span></div>
-                        <div class="slider-track">
-                            <div class="slider-progress" style="width: 25%"></div>
-                            <div class="slider-thumb" style="left: 25%"></div>
-                            <input type="range" min="0" max="100" value="25" class="range-slider" id="delay-slider">
-                        </div>
-                    </div>
                     
                     <div class="combo-box">
                         <select>
-                            <option>All Weapons</option>
-                            <option>Sniper Only</option>
-                            <option>AR Only</option>
-                            <option>Shotgun Only</option>
+                            <option>Aim Type: Memory</option>
+                            <option>Aim Type: Silent</option>
+                            <option>Aim Type: RCS</option>
                         </select>
                     </div>
-                </div>
-                
-                <div class="control-group">
+                    
                     <div class="control-header">
-                        <div class="control-label">Recoil Control</div>
+                        <div class="control-label">
+                            Prediction
+                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Predict target movement"></i>
+                        </div>
                         <div class="toggle-container">
                             <label class="toggle-switch">
                                 <input type="checkbox" checked>
@@ -928,63 +714,481 @@
                             </label>
                         </div>
                     </div>
-                    <div class="control-description">
-                        Compensates for weapon recoil patterns. Adjust the strength for perfect control.
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            Visible Check
+                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Only target visible players"></i>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            Ignore Downed
+                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Ignore downed players"></i>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            Render FOV
+                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Show aimbot field of view circle"></i>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
                     </div>
                     
                     <div class="slider-container">
-                        <div class="slider-value">Strength: <span>75%</span></div>
+                        <div class="slider-value">FOV Radius: <span>15°</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 15%"></div>
+                            <div class="slider-thumb" style="left: 15%"></div>
+                            <input type="range" min="1" max="30" value="15" class="range-slider" id="fov-radius-slider">
+                        </div>
+                    </div>
+                    
+                    <div class="slider-container">
+                        <div class="slider-value">Smoothness: <span>5</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 10%"></div>
+                            <div class="slider-thumb" style="left: 10%"></div>
+                            <input type="range" min="1" max="50" value="5" class="range-slider" id="smooth-slider">
+                        </div>
+                    </div>
+                    
+                    <div class="combo-box">
+                        <select>
+                            <option>Hit Box: Head</option>
+                            <option>Hit Box: Neck</option>
+                            <option>Hit Box: Chest</option>
+                            <option>Hit Box: Pelvis</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <div class="control-header">
+                        <div class="control-label">
+                            Triggerbot
+                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Automatically fire when target is in crosshair"></i>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            Shotgun Only
+                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Only activate triggerbot with shotguns"></i>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            Ignore Keybind
+                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Triggerbot works without holding key"></i>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="slider-container">
+                        <div class="slider-value">Custom Delay: <span>100ms</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 50%"></div>
+                            <div class="slider-thumb" style="left: 50%"></div>
+                            <input type="range" min="0" max="200" value="100" class="range-slider" id="delay-slider">
+                        </div>
+                    </div>
+                    
+                    <div class="slider-container">
+                        <div class="slider-value">Max Distance: <span>15m</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 15%"></div>
+                            <div class="slider-thumb" style="left: 15%"></div>
+                            <input type="range" min="1" max="100" value="15" class="range-slider" id="distance-slider">
+                        </div>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            Humanization
+                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Add human-like imperfections to aim"></i>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="slider-container">
+                        <div class="slider-value">Mistake Size: <span>0</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 0%"></div>
+                            <div class="slider-thumb" style="left: 0%"></div>
+                            <input type="range" min="0" max="10" value="0" class="range-slider" id="mistake-slider">
+                        </div>
+                    </div>
+                    
+                    <div class="slider-container">
+                        <div class="slider-value">Mistake Correction: <span>0</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 0%"></div>
+                            <div class="slider-thumb" style="left: 0%"></div>
+                            <input type="range" min="0" max="10" value="0" class="range-slider" id="correction-slider">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- VISUALS TAB -->
+        <div class="tab-content" id="visual-tab">
+            <h2 class="section-title"><i class="fas fa-eye"></i> VISUAL SETTINGS</h2>
+            <div class="controls-grid">
+                <div class="control-group">
+                    <div class="control-header">
+                        <div class="control-label">
+                            Username
+                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Display player usernames"></i>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            Team ID Username
+                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Show team ID in username"></i>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            Rank
+                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Display player ranks"></i>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            Distance
+                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Show distance to players"></i>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            Held Weapon
+                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Show currently held weapon"></i>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            Platform
+                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Show player platform (PC/Console)"></i>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            Spectators
+                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Show spectator count"></i>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            Skeletons
+                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Display player skeletons"></i>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="combo-box">
+                        <select>
+                            <option>Skeleton Type: Normal</option>
+                            <option>Skeleton Type: Advanced</option>
+                            <option>Skeleton Type: Simple</option>
+                        </select>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            Skeleton Outline
+                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Add outline to skeletons"></i>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="slider-container">
+                        <div class="slider-value">Skeleton Thickness: <span>2</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 20%"></div>
+                            <div class="slider-thumb" style="left: 20%"></div>
+                            <input type="range" min="1" max="10" value="2" class="range-slider" id="skeleton-thickness">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <div class="control-header">
+                        <div class="control-label">
+                            Box
+                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Display boxes around players"></i>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            Filled Box
+                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Fill player boxes with color"></i>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="combo-box">
+                        <select>
+                            <option>Box Type: 2D</option>
+                            <option>Box Type: 3D</option>
+                            <option>Box Type: Corner</option>
+                        </select>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            Box Outline
+                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Add outline to player boxes"></i>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            Text Outline
+                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Add outline to text elements"></i>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="slider-container">
+                        <div class="slider-value">Box Thickness: <span>2</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 20%"></div>
+                            <div class="slider-thumb" style="left: 20%"></div>
+                            <input type="range" min="1" max="10" value="2" class="range-slider" id="box-thickness">
+                        </div>
+                    </div>
+                    
+                    <div class="slider-container">
+                        <div class="slider-value">Render Distance: <span>280m</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 70%"></div>
+                            <div class="slider-thumb" style="left: 70%"></div>
+                            <input type="range" min="50" max="400" value="280" class="range-slider" id="render-distance">
+                        </div>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            vSync
+                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Enable vertical sync for visuals"></i>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            Player TP
+                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Teleport to player position"></i>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            Snap Lines
+                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Draw lines to players"></i>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="combo-box">
+                        <select>
+                            <option>Snap Line Type: To Player</option>
+                            <option>Snap Line Type: From Bottom</option>
+                            <option>Snap Line Type: From Top</option>
+                        </select>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            Outline Lines
+                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Add outline to snap lines"></i>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="slider-container">
+                        <div class="slider-value">Line Thickness: <span>1</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 10%"></div>
+                            <div class="slider-thumb" style="left: 10%"></div>
+                            <input type="range" min="1" max="10" value="1" class="range-slider" id="line-thickness">
+                        </div>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            World ESP
+                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Show world items"></i>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="slider-container">
+                        <div class="slider-value">Loot Distance: <span>75m</span></div>
                         <div class="slider-track">
                             <div class="slider-progress" style="width: 75%"></div>
                             <div class="slider-thumb" style="left: 75%"></div>
-                            <input type="range" min="0" max="100" value="75" class="range-slider" id="recoil-slider">
+                            <input type="range" min="10" max="200" value="75" class="range-slider" id="loot-distance">
                         </div>
                     </div>
                     
-                    <div class="combo-box">
-                        <select>
-                            <option>All Weapons</option>
-                            <option>AR Only</option>
-                            <option>SMG Only</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="control-group">
                     <div class="control-header">
-                        <div class="control-label">Target Selection</div>
-                    </div>
-                    <div class="control-description">
-                        Configure which targets the aimbot should prioritize for maximum efficiency.
-                    </div>
-                    
-                    <div class="combo-box">
-                        <select>
-                            <option>Closest to Crosshair</option>
-                            <option>Closest Player</option>
-                            <option>Lowest Health</option>
-                            <option>Highest Threat</option>
-                        </select>
-                    </div>
-                    
-                    <div class="button-group">
-                        <button class="btn btn-primary">
-                            <i class="fas fa-save"></i> Save Settings
-                        </button>
-                        <button class="btn btn-secondary">
-                            <i class="fas fa-sync-alt"></i> Reset
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="tab-content" id="visual-tab">
-            <h2 class="section-title"><i class="fas fa-eye"></i> VISUAL ENHANCEMENTS</h2>
-            <div class="controls-grid">
-                <div class="control-group">
-                    <div class="control-header">
-                        <div class="control-label">Player ESP</div>
+                        <div class="control-label">
+                            ESP Down Check
+                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Check for downed players in ESP"></i>
+                        </div>
                         <div class="toggle-container">
                             <label class="toggle-switch">
                                 <input type="checkbox" checked>
@@ -992,32 +1196,12 @@
                             </label>
                         </div>
                     </div>
-                    <div class="control-description">
-                        Display player positions, health, and distance through walls with customizable styles.
-                    </div>
                     
-                    <div class="combo-box">
-                        <select>
-                            <option>Box Style: 2D Corner</option>
-                            <option>2D Full</option>
-                            <option>3D</option>
-                            <option>Skeleton</option>
-                        </select>
-                    </div>
-                    
-                    <div class="slider-container">
-                        <div class="slider-value">Render Distance: <span>250m</span></div>
-                        <div class="slider-track">
-                            <div class="slider-progress" style="width: 50%"></div>
-                            <div class="slider-thumb" style="left: 50%"></div>
-                            <input type="range" min="50" max="500" value="250" class="range-slider" id="render-slider">
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="control-group">
                     <div class="control-header">
-                        <div class="control-label">Item ESP</div>
+                        <div class="control-label">
+                            Aim Down Check
+                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Check for downed players in aimbot"></i>
+                        </div>
                         <div class="toggle-container">
                             <label class="toggle-switch">
                                 <input type="checkbox" checked>
@@ -1025,145 +1209,20 @@
                             </label>
                         </div>
                     </div>
-                    <div class="control-description">
-                        Show important items and weapons through walls. Filter by item type and rarity.
-                    </div>
-                    
-                    <div class="combo-box">
-                        <select>
-                            <option>Show: Weapons & Ammo</option>
-                            <option>Weapons Only</option>
-                            <option>Healing Items</option>
-                            <option>All Items</option>
-                        </select>
-                    </div>
-                    
-                    <div class="slider-container">
-                        <div class="slider-value">Item Render Distance: <span>150m</span></div>
-                        <div class="slider-track">
-                            <div class="slider-progress" style="width: 50%"></div>
-                            <div class="slider-thumb" style="left: 50%"></div>
-                            <input type="range" min="10" max="300" value="150" class="range-slider" id="item-slider">
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="control-group">
-                    <div class="control-header">
-                        <div class="control-label">Chams & Glow</div>
-                        <div class="toggle-container">
-                            <label class="toggle-switch">
-                                <input type="checkbox">
-                                <span class="slider"></span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="control-description">
-                        Apply colored glow effects to players and items for enhanced visibility.
-                    </div>
-                    
-                    <div class="slider-container">
-                        <div class="slider-value">Glow Intensity: <span>60%</span></div>
-                        <div class="slider-track">
-                            <div class="slider-progress" style="width: 60%"></div>
-                            <div class="slider-thumb" style="left: 60%"></div>
-                            <input type="range" min="0" max="100" value="60" class="range-slider" id="glow-slider">
-                        </div>
-                    </div>
-                    
-                    <div class="combo-box">
-                        <select>
-                            <option>Team: Blue, Enemies: Red</option>
-                            <option>Team: Green, Enemies: Purple</option>
-                            <option>Custom Colors</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="control-group">
-                    <div class="control-header">
-                        <div class="control-label">World Modifiers</div>
-                    </div>
-                    <div class="control-description">
-                        Remove visual clutter and enhance game visibility for competitive advantage.
-                    </div>
-                    
-                    <div class="toggle-container" style="margin-bottom: 15px;">
-                        <label class="toggle-switch">
-                            <input type="checkbox">
-                            <span class="slider"></span>
-                        </label>
-                        <span style="margin-left: 10px;">No Fog</span>
-                    </div>
-                    
-                    <div class="toggle-container" style="margin-bottom: 15px;">
-                        <label class="toggle-switch">
-                            <input type="checkbox">
-                            <span class="slider"></span>
-                        </label>
-                        <span style="margin-left: 10px;">No Blur</span>
-                    </div>
-                    
-                    <div class="button-group">
-                        <button class="btn btn-primary">
-                            <i class="fas fa-brush"></i> Apply Visuals
-                        </button>
-                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="tab-content" id="misc-tab">
-            <h2 class="section-title"><i class="fas fa-cogs"></i> MISCELLANEOUS FEATURES</h2>
+        <!-- RADAR TAB -->
+        <div class="tab-content" id="radar-tab">
+            <h2 class="section-title"><i class="fas fa-radar"></i> RADAR SETTINGS</h2>
             <div class="controls-grid">
                 <div class="control-group">
                     <div class="control-header">
-                        <div class="control-label">Speed Hack</div>
-                        <div class="toggle-container">
-                            <label class="toggle-switch">
-                                <input type="checkbox">
-                                <span class="slider"></span>
-                            </label>
+                        <div class="control-label">
+                            Radar
+                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Enable the radar feature"></i>
                         </div>
-                    </div>
-                    <div class="control-description">
-                        Increase movement speed for faster rotations and escapes.
-                    </div>
-                    
-                    <div class="slider-container">
-                        <div class="slider-value">Speed Multiplier: <span>1.5x</span></div>
-                        <div class="slider-track">
-                            <div class="slider-progress" style="width: 50%"></div>
-                            <div class="slider-thumb" style="left: 50%"></div>
-                            <input type="range" min="1" max="3" step="0.1" value="1.5" class="range-slider" id="speed-slider">
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="control-group">
-                    <div class="control-header">
-                        <div class="control-label">No Clip</div>
-                        <div class="toggle-container">
-                            <label class="toggle-switch">
-                                <input type="checkbox">
-                                <span class="slider"></span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="control-description">
-                        Walk through walls and objects for strategic positioning.
-                    </div>
-                    
-                    <div class="button-group">
-                        <button class="btn btn-primary">
-                            <i class="fas fa-key"></i> Bind Key
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="control-group">
-                    <div class="control-header">
-                        <div class="control-label">Auto Loot</div>
                         <div class="toggle-container">
                             <label class="toggle-switch">
                                 <input type="checkbox" checked>
@@ -1171,22 +1230,47 @@
                             </label>
                         </div>
                     </div>
-                    <div class="control-description">
-                        Automatically collect nearby items matching your preferences.
+                    
+                    <div class="slider-container">
+                        <div class="slider-value">Radar Range: <span>170m</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 85%"></div>
+                            <div class="slider-thumb" style="left: 85%"></div>
+                            <input type="range" min="50" max="200" value="170" class="range-slider" id="radar-range">
+                        </div>
                     </div>
                     
-                    <div class="combo-box">
-                        <select>
-                            <option>Loot: Weapons & Ammo</option>
-                            <option>Healing Items Only</option>
-                            <option>All Items</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="control-group">
                     <div class="control-header">
-                        <div class="control-label">Radar Hack</div>
+                        <div class="control-label">
+                            Show Distance
+                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Show distance on radar"></i>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            Show Platform
+                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Show platform on radar"></i>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            Show Team
+                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Show team members on radar"></i>
+                        </div>
                         <div class="toggle-container">
                             <label class="toggle-switch">
                                 <input type="checkbox">
@@ -1194,135 +1278,173 @@
                             </label>
                         </div>
                     </div>
-                    <div class="control-description">
-                        Show enemy positions on minimap at all times.
-                    </div>
                     
-                    <div class="slider-container">
-                        <div class="slider-value">Range: <span>200m</span></div>
-                        <div class="slider-track">
-                            <div class="slider-progress" style="width: 66.7%"></div>
-                            <div class="slider-thumb" style="left: 66.7%"></div>
-                            <input type="range" min="50" max="500" value="200" class="range-slider" id="radar-slider">
+                    <div class="control-header">
+                        <div class="control-label">
+                            Team ID Radar
+                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Show team ID on radar"></i>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="tab-content" id="settings-tab">
-            <h2 class="section-title"><i class="fas fa-sliders-h"></i> SYSTEM SETTINGS</h2>
+        <!-- WEAPON CONFIG TAB -->
+        <div class="tab-content" id="weapon-tab">
+            <h2 class="section-title"><i class="fas fa-gun"></i> WEAPON CONFIGURATION</h2>
             <div class="controls-grid">
                 <div class="control-group">
                     <div class="control-header">
-                        <div class="control-label">Hotkey Configuration</div>
-                    </div>
-                    <div class="control-description">
-                        Customize key bindings for activating cheat features.
-                    </div>
-                    
-                    <div class="combo-box">
-                        <select>
-                            <option>Menu Toggle: INSERT</option>
-                            <option>Menu Toggle: F1</option>
-                            <option>Menu Toggle: F2</option>
-                        </select>
-                    </div>
-                    
-                    <div class="combo-box">
-                        <select>
-                            <option>Panic Key: F12</option>
-                            <option>Panic Key: DELETE</option>
-                            <option>Panic Key: END</option>
-                        </select>
-                    </div>
-                    
-                    <div class="button-group">
-                        <button class="btn btn-primary">
-                            <i class="fas fa-keyboard"></i> Apply Keybinds
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="control-group">
-                    <div class="control-header">
-                        <div class="control-label">Security Settings</div>
-                    </div>
-                    <div class="control-description">
-                        Configure anti-detection measures and safety features.
-                    </div>
-                    
-                    <div class="toggle-container" style="margin-bottom: 15px;">
-                        <label class="toggle-switch">
-                            <input type="checkbox" checked>
-                            <span class="slider"></span>
-                        </label>
-                        <span style="margin-left: 10px;">Stealth Mode</span>
-                    </div>
-                    
-                    <div class="toggle-container" style="margin-bottom: 15px;">
-                        <label class="toggle-switch">
-                            <input type="checkbox">
-                            <span class="slider"></span>
-                        </label>
-                        <span style="margin-left: 10px;">Auto-Updates</span>
-                    </div>
-                    
-                    <div class="button-group">
-                        <button class="btn btn-primary">
-                            <i class="fas fa-shield-alt"></i> Apply Security
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="control-group">
-                    <div class="control-header">
-                        <div class="control-label">Performance Settings</div>
-                    </div>
-                    <div class="control-description">
-                        Optimize cheat performance for your system.
-                    </div>
-                    
-                    <div class="slider-container">
-                        <div class="slider-value">CPU Usage: <span>Medium</span></div>
-                        <div class="slider-track">
-                            <div class="slider-progress" style="width: 50%"></div>
-                            <div class="slider-thumb" style="left: 50%"></div>
-                            <input type="range" min="0" max="2" value="1" class="range-slider" id="cpu-slider">
+                        <div class="control-label">
+                            Weapon Config
+                            <i class="fas fa-question-circle tooltip-icon" data-tooltip="Enable weapon-specific settings"></i>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
                         </div>
                     </div>
                     
-                    <div class="button-group">
-                        <button class="btn btn-primary">
-                            <i class="fas fa-bolt"></i> Optimize
-                        </button>
+                    <div class="combo-box">
+                        <select>
+                            <option>Weapon Type: Assault Rifle</option>
+                            <option>Weapon Type: Shotgun</option>
+                            <option>Weapon Type: SMG</option>
+                            <option>Weapon Type: Pistol</option>
+                            <option>Weapon Type: Sniper</option>
+                        </select>
+                    </div>
+                    
+                    <div class="slider-container">
+                        <div class="slider-value">AR Smooth: <span>5</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 10%"></div>
+                            <div class="slider-thumb" style="left: 10%"></div>
+                            <input type="range" min="1" max="50" value="5" class="range-slider" id="ar-smooth">
+                        </div>
+                    </div>
+                    
+                    <div class="slider-container">
+                        <div class="slider-value">AR FOV: <span>10°</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 20%"></div>
+                            <div class="slider-thumb" style="left: 20%"></div>
+                            <input type="range" min="1" max="50" value="10" class="range-slider" id="ar-fov">
+                        </div>
+                    </div>
+                    
+                    <div class="slider-container">
+                        <div class="slider-value">Shotgun Smooth: <span>8</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 16%"></div>
+                            <div class="slider-thumb" style="left: 16%"></div>
+                            <input type="range" min="1" max="50" value="8" class="range-slider" id="shotgun-smooth">
+                        </div>
+                    </div>
+                    
+                    <div class="slider-container">
+                        <div class="slider-value">Shotgun FOV: <span>15°</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 30%"></div>
+                            <div class="slider-thumb" style="left: 30%"></div>
+                            <input type="range" min="1" max="50" value="15" class="range-slider" id="shotgun-fov">
+                        </div>
                     </div>
                 </div>
                 
                 <div class="control-group">
-                    <div class="control-header">
-                        <div class="control-label">Profile Management</div>
-                    </div>
-                    <div class="control-description">
-                        Save and load your cheat configurations.
-                    </div>
-                    
-                    <div class="combo-box">
-                        <select>
-                            <option>Select Profile: Default</option>
-                            <option>Sniper Loadout</option>
-                            <option>Aggressive Play</option>
-                            <option>Stealth Configuration</option>
-                        </select>
+                    <div class="slider-container">
+                        <div class="slider-value">SMG Smooth: <span>4</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 8%"></div>
+                            <div class="slider-thumb" style="left: 8%"></div>
+                            <input type="range" min="1" max="50" value="4" class="range-slider" id="smg-smooth">
+                        </div>
                     </div>
                     
-                    <div class="button-group">
-                        <button class="btn btn-primary">
-                            <i class="fas fa-save"></i> Save Profile
-                        </button>
-                        <button class="btn btn-secondary">
-                            <i class="fas fa-folder-open"></i> Load Profile
-                        </button>
+                    <div class="slider-container">
+                        <div class="slider-value">SMG FOV: <span>8°</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 16%"></div>
+                            <div class="slider-thumb" style="left: 16%"></div>
+                            <input type="range" min="1" max="50" value="8" class="range-slider" id="smg-fov">
+                        </div>
+                    </div>
+                    
+                    <div class="slider-container">
+                        <div class="slider-value">Pistol Smooth: <span>3</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 6%"></div>
+                            <div class="slider-thumb" style="left: 6%"></div>
+                            <input type="range" min="1" max="50" value="3" class="range-slider" id="pistol-smooth">
+                        </div>
+                    </div>
+                    
+                    <div class="slider-container">
+                        <div class="slider-value">Pistol FOV: <span>6°</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 12%"></div>
+                            <div class="slider-thumb" style="left: 12%"></div>
+                            <input type="range" min="1" max="50" value="6" class="range-slider" id="pistol-fov">
+                        </div>
+                    </div>
+                    
+                    <div class="slider-container">
+                        <div class="slider-value">Sniper Smooth: <span>2</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 4%"></div>
+                            <div class="slider-thumb" style="left: 4%"></div>
+                            <input type="range" min="1" max="50" value="2" class="range-slider" id="sniper-smooth">
+                        </div>
+                    </div>
+                    
+                    <div class="slider-container">
+                        <div class="slider-value">Sniper FOV: <span>3°</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 6%"></div>
+                            <div class="slider-thumb" style="left: 6%"></div>
+                            <input type="range" min="1" max="50" value="3" class="range-slider" id="sniper-fov">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- COLORS TAB -->
+        <div class="tab-content" id="colors-tab">
+            <h2 class="section-title"><i class="fas fa-palette"></i> COLOR SETTINGS</h2>
+            <div class="controls-grid">
+                <div class="control-group">
+                    <div class="color-picker">
+                        <div class="color-label">Visible Color:</div>
+                        <div class="color-preview" style="background-color: rgb(131, 128, 237);"></div>
+                        <div>RGB(131, 128, 237)</div>
+                    </div>
+                    
+                    <div class="color-picker">
+                        <div class="color-label">Invisible Color:</div>
+                        <div class="color-preview" style="background-color: rgb(250, 151, 30);"></div>
+                        <div>RGB(250, 151, 30)</div>
+                    </div>
+                    
+                    <div class="color-picker">
+                        <div class="color-label">Team Color:</div>
+                        <div class="color-preview" style="background-color: rgb(0, 255, 0);"></div>
+                        <div>RGB(0, 255, 0)</div>
+                    </div>
+                    
+                    <div class="color-picker">
+                        <div class="color-label">Downed Color:</div>
+                        <div class="color-preview" style="background-color: rgb(255, 255, 0);"></div>
+                        <div>RGB(255, 255, 0)</div>
                     </div>
                 </div>
             </div>
@@ -1372,88 +1494,7 @@
         // Initialize particles
         createParticles();
         
-        // Login functionality
-        const loginContainer = document.getElementById('loginContainer');
-        const mainContainer = document.getElementById('mainContainer');
-        const licenseInput = document.getElementById('licenseKey');
-        const submitBtn = document.getElementById('submitBtn');
-        const errorMessage = document.getElementById('errorMessage');
-        const successMessage = document.getElementById('successMessage');
-        
-        submitBtn.addEventListener('click', validateLicense);
-        licenseInput.addEventListener('keyup', (e) => {
-            if (e.key === 'Enter') validateLicense();
-        });
-        
-        function validateLicense() {
-            const licenseKey = licenseInput.value.trim();
-            
-            // Hide messages
-            errorMessage.style.display = 'none';
-            successMessage.style.display = 'none';
-            
-            if (!licenseKey) {
-                showErrorMessage("Please enter a license key");
-                return;
-            }
-            
-            if (licenseKey.toLowerCase() === "bozzy") {
-                // Correct key
-                showSuccessMessage();
-                
-                // After animation, show main panel
-                setTimeout(() => {
-                    loginContainer.style.opacity = '0';
-                    loginContainer.style.transform = 'translateY(20px)';
-                    
-                    setTimeout(() => {
-                        loginContainer.style.display = 'none';
-                        mainContainer.style.display = 'block';
-                        
-                        // Fade in main panel
-                        setTimeout(() => {
-                            mainContainer.style.opacity = '1';
-                            mainContainer.style.transform = 'translateY(0)';
-                        }, 50);
-                    }, 500);
-                }, 1500);
-            } else {
-                // Incorrect key
-                showErrorMessage("Invalid license key! Please try again.");
-            }
-        }
-        
-        function showErrorMessage(message) {
-            errorMessage.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${message}`;
-            errorMessage.style.display = 'block';
-            licenseInput.classList.add('shake');
-            
-            setTimeout(() => {
-                licenseInput.classList.remove('shake');
-            }, 500);
-            
-            // Reset input with animation
-            licenseInput.style.borderColor = 'var(--danger)';
-            licenseInput.style.boxShadow = '0 0 0 3px rgba(231, 76, 108, 0.3)';
-            licenseInput.value = '';
-            licenseInput.focus();
-        }
-        
-        function showSuccessMessage() {
-            successMessage.style.display = 'block';
-            licenseInput.style.borderColor = 'var(--success)';
-            licenseInput.style.boxShadow = '0 0 0 3px rgba(46, 204, 113, 0.3)';
-            submitBtn.disabled = true;
-            
-            // Add checkmark animation
-            const checkmark = document.querySelector('.checkmark');
-            checkmark.style.animation = 'none';
-            setTimeout(() => {
-                checkmark.style.animation = 'checkmarkScale 0.5s ease';
-            }, 10);
-        }
-        
-        // Tab functionality for main panel
+        // Tab functionality
         document.querySelectorAll('.tab').forEach(tab => {
             tab.addEventListener('click', () => {
                 // Remove active class from all tabs and content
@@ -1480,13 +1521,10 @@
             const value = parseFloat(slider.value);
             const percentage = ((value - min) / (max - min)) * 100;
             
-            if (slider.id.includes('fov') || slider.id.includes('render') || slider.id.includes('item') || slider.id.includes('radar')) {
+            if (slider.id.includes('fov') || slider.id.includes('distance') || slider.id.includes('range')) {
                 valueDisplay.querySelector('span').textContent = `${value}${slider.id.includes('fov') ? '°' : 'm'}`;
-            } else if (slider.id === 'speed-slider') {
-                valueDisplay.querySelector('span').textContent = `${value}x`;
-            } else if (slider.id === 'cpu-slider') {
-                const levels = ['Low', 'Medium', 'High'];
-                valueDisplay.querySelector('span').textContent = levels[value];
+            } else if (slider.id === 'smooth' || slider.id.includes('smooth') || slider.id.includes('thickness')) {
+                valueDisplay.querySelector('span').textContent = `${value}`;
             } else {
                 valueDisplay.querySelector('span').textContent = `${value}%`;
             }
@@ -1499,13 +1537,10 @@
                 const currentValue = parseFloat(slider.value);
                 const currentPercentage = ((currentValue - min) / (max - min)) * 100;
                 
-                if (slider.id.includes('fov') || slider.id.includes('render') || slider.id.includes('item') || slider.id.includes('radar')) {
+                if (slider.id.includes('fov') || slider.id.includes('distance') || slider.id.includes('range')) {
                     valueDisplay.querySelector('span').textContent = `${currentValue}${slider.id.includes('fov') ? '°' : 'm'}`;
-                } else if (slider.id === 'speed-slider') {
-                    valueDisplay.querySelector('span').textContent = `${currentValue}x`;
-                } else if (slider.id === 'cpu-slider') {
-                    const levels = ['Low', 'Medium', 'High'];
-                    valueDisplay.querySelector('span').textContent = levels[currentValue];
+                } else if (slider.id === 'smooth' || slider.id.includes('smooth') || slider.id.includes('thickness')) {
+                    valueDisplay.querySelector('span').textContent = `${currentValue}`;
                 } else {
                     valueDisplay.querySelector('span').textContent = `${currentValue}%`;
                 }
