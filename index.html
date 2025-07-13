@@ -6,11 +6,18 @@
     <title>XPLO Fortnite Suite</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
         :root {
-            --bg-dark: #0d0d12;
-            --card-bg: rgba(30, 30, 42, 0.7);
+            --bg-dark: #0a0a12;
+            --card-bg: rgba(25, 23, 36, 0.95);
             --card-border: rgba(90, 70, 120, 0.3);
-            --text-primary: #e6e6ff;
+            --text-primary: #f0f0ff;
             --text-secondary: #b0b0d0;
             --accent-lilac: #c8a2c8;
             --accent-lilac-light: #d8b9f8;
@@ -21,18 +28,11 @@
             --danger: #e74c6c;
             --success: #2ecc91;
             --tab-active: rgba(200, 162, 220, 0.25);
-            --glass-bg: rgba(20, 15, 30, 0.45);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --glass-bg: rgba(20, 15, 30, 0.65);
         }
 
         body {
-            background: linear-gradient(135deg, #0c0b16, #1a172e, #0c0b16);
+            background: linear-gradient(135deg, #070613, #15122b, #070613);
             color: var(--text-primary);
             min-height: 100vh;
             display: flex;
@@ -40,6 +40,7 @@
             align-items: center;
             padding: 20px;
             overflow: hidden;
+            position: relative;
         }
 
         body::before {
@@ -49,8 +50,21 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at 20% 30%, rgba(100, 70, 150, 0.15) 0%, transparent 40%),
-                        radial-gradient(circle at 80% 70%, rgba(70, 40, 120, 0.15) 0%, transparent 40%);
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(100, 70, 150, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(70, 40, 120, 0.15) 0%, transparent 40%),
+                linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+            z-index: -1;
+        }
+
+        .blur-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             z-index: -1;
         }
 
@@ -59,11 +73,9 @@
             max-width: 950px;
             background: var(--glass-bg);
             border-radius: 18px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
             overflow: hidden;
             border: 1px solid var(--card-border);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
             transform: perspective(1000px) rotateX(1deg);
         }
 
@@ -75,6 +87,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            backdrop-filter: blur(4px);
         }
 
         .logo {
@@ -123,26 +136,17 @@
             align-items: center;
             gap: 10px;
             padding: 8px 20px;
-            background: rgba(200, 162, 220, 0.15);
+            background: rgba(231, 76, 60, 0.15);
             border-radius: 30px;
-            border: 1px solid var(--accent-lilac-dark);
+            border: 1px solid var(--danger);
             backdrop-filter: blur(5px);
-            box-shadow: 0 0 10px rgba(160, 110, 220, 0.2);
-            animation: pulse-glow 3s infinite;
         }
 
         .status-dot {
             width: 12px;
             height: 12px;
-            background: var(--success);
+            background: var(--danger);
             border-radius: 50%;
-            box-shadow: 0 0 10px var(--success);
-        }
-
-        @keyframes pulse-glow {
-            0% { box-shadow: 0 0 10px rgba(160, 110, 220, 0.2); }
-            50% { box-shadow: 0 0 20px rgba(180, 130, 240, 0.4); }
-            100% { box-shadow: 0 0 10px rgba(160, 110, 220, 0.2); }
         }
 
         /* Tab Navigation */
@@ -150,6 +154,7 @@
             display: flex;
             background: rgba(15, 10, 25, 0.5);
             border-bottom: 1px solid var(--card-border);
+            backdrop-filter: blur(4px);
         }
 
         .tab {
@@ -222,12 +227,11 @@
             border-radius: 15px;
             padding: 25px;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            backdrop-filter: blur(8px);
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
 
         .control-group:hover {
-            transform: translateY(-8px) scale(1.01);
+            transform: translateY(-8px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), 0 0 0 1px var(--accent-lilac);
         }
 
@@ -321,7 +325,6 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            backdrop-filter: blur(5px);
             position: relative;
             overflow: hidden;
             z-index: 1;
@@ -411,29 +414,56 @@
             color: var(--accent-lilac);
         }
 
-        /* Slider */
+        /* Enhanced Slider Design */
         .slider-container {
             width: 100%;
             padding: 15px 0;
+            position: relative;
         }
 
         .slider-value {
             text-align: right;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
             color: var(--accent-lilac-light);
             font-weight: 600;
             font-size: 16px;
-            text-shadow: 0 0 5px rgba(200, 162, 255, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .slider-value::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 4px;
+            width: 100%;
+            background: var(--slider-bg);
+            border-radius: 2px;
+            z-index: 1;
+        }
+
+        .slider-progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 4px;
+            background: var(--accent-lilac);
+            border-radius: 2px;
+            z-index: 2;
+            transition: width 0.3s ease;
         }
 
         .range-slider {
             width: 100%;
             height: 8px;
-            background: var(--slider-bg);
+            background: transparent;
             border-radius: 4px;
             outline: none;
             -webkit-appearance: none;
-            transition: all 0.3s ease;
+            position: relative;
+            z-index: 3;
         }
 
         .range-slider::-webkit-slider-thumb {
@@ -446,16 +476,17 @@
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: 0 0 0 2px rgba(200, 162, 200, 0.3), 0 4px 10px rgba(0, 0, 0, 0.4);
             border: 2px solid white;
+            transform: translateY(calc(-50% + 2px));
         }
 
         .range-slider::-webkit-slider-thumb:hover {
-            transform: scale(1.2);
+            transform: translateY(calc(-50% + 2px)) scale(1.2);
             box-shadow: 0 0 0 4px rgba(200, 162, 255, 0.3), 0 6px 15px rgba(0, 0, 0, 0.5);
             background: var(--accent-lilac-light);
         }
 
         .range-slider:active::-webkit-slider-thumb {
-            transform: scale(1.3);
+            transform: translateY(calc(-50% + 2px)) scale(1.3);
         }
 
         /* Footer */
@@ -468,6 +499,7 @@
             align-items: center;
             font-size: 14px;
             color: var(--text-secondary);
+            backdrop-filter: blur(4px);
         }
 
         .hotkey {
@@ -478,7 +510,6 @@
             background: rgba(200, 162, 220, 0.15);
             border-radius: 30px;
             border: 1px solid var(--accent-lilac-dark);
-            backdrop-filter: blur(5px);
         }
 
         .hotkey kbd {
@@ -491,7 +522,17 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
 
-        /* Floating Particles */
+        /* Animation for tab content */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .tab-content.active {
+            animation: fadeIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        /* Floating particles */
         .particles {
             position: absolute;
             width: 100%;
@@ -500,11 +541,12 @@
             left: 0;
             pointer-events: none;
             z-index: -1;
+            overflow: hidden;
         }
 
         .particle {
             position: absolute;
-            background: rgba(200, 162, 255, 0.15);
+            background: rgba(200, 162, 255, 0.1);
             border-radius: 50%;
             animation: float 15s infinite linear;
         }
@@ -515,19 +557,10 @@
             90% { opacity: 1; }
             100% { transform: translateY(-100vh) translateX(100px) rotate(360deg); opacity: 0; }
         }
-
-        /* Animation for tab content */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .tab-content.active {
-            animation: fadeIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-        }
     </style>
 </head>
 <body>
+    <div class="blur-layer"></div>
     <div class="particles" id="particles"></div>
     
     <div class="container">
@@ -540,7 +573,7 @@
             </div>
             <div class="status">
                 <div class="status-dot"></div>
-                <span>INJECTED - GAME ACTIVE</span>
+                <span>NOT INJECTED - GAME INACTIVE</span>
             </div>
         </header>
 
@@ -569,12 +602,14 @@
                     </div>
                     
                     <div class="slider-container">
-                        <div class="slider-value">FOV: 80°</div>
+                        <div class="slider-value">FOV: <span>80°</span></div>
+                        <div class="slider-progress" style="width: 44.4%"></div>
                         <input type="range" min="10" max="180" value="80" class="range-slider" id="fov-slider">
                     </div>
                     
                     <div class="slider-container">
-                        <div class="slider-value">Smoothness: 45%</div>
+                        <div class="slider-value">Smoothness: <span>45%</span></div>
+                        <div class="slider-progress" style="width: 45%"></div>
                         <input type="range" min="0" max="100" value="45" class="range-slider" id="smooth-slider">
                     </div>
                 </div>
@@ -594,7 +629,8 @@
                     </div>
                     
                     <div class="slider-container">
-                        <div class="slider-value">Delay: 25ms</div>
+                        <div class="slider-value">Delay: <span>25ms</span></div>
+                        <div class="slider-progress" style="width: 25%"></div>
                         <input type="range" min="0" max="100" value="25" class="range-slider" id="delay-slider">
                     </div>
                     
@@ -623,7 +659,8 @@
                     </div>
                     
                     <div class="slider-container">
-                        <div class="slider-value">Strength: 75%</div>
+                        <div class="slider-value">Strength: <span>75%</span></div>
+                        <div class="slider-progress" style="width: 75%"></div>
                         <input type="range" min="0" max="100" value="75" class="range-slider" id="recoil-slider">
                     </div>
                     
@@ -692,7 +729,8 @@
                     </div>
                     
                     <div class="slider-container">
-                        <div class="slider-value">Render Distance: 250m</div>
+                        <div class="slider-value">Render Distance: <span>250m</span></div>
+                        <div class="slider-progress" style="width: 50%"></div>
                         <input type="range" min="50" max="500" value="250" class="range-slider" id="render-slider">
                     </div>
                 </div>
@@ -721,7 +759,8 @@
                     </div>
                     
                     <div class="slider-container">
-                        <div class="slider-value">Item Render Distance: 150m</div>
+                        <div class="slider-value">Item Render Distance: <span>150m</span></div>
+                        <div class="slider-progress" style="width: 50%"></div>
                         <input type="range" min="10" max="300" value="150" class="range-slider" id="item-slider">
                     </div>
                 </div>
@@ -741,7 +780,8 @@
                     </div>
                     
                     <div class="slider-container">
-                        <div class="slider-value">Glow Intensity: 60%</div>
+                        <div class="slider-value">Glow Intensity: <span>60%</span></div>
+                        <div class="slider-progress" style="width: 60%"></div>
                         <input type="range" min="0" max="100" value="60" class="range-slider" id="glow-slider">
                     </div>
                     
@@ -844,15 +884,42 @@
             });
         });
         
-        // Update slider values
+        // Update slider values and progress bars
         document.querySelectorAll('.range-slider').forEach(slider => {
             // Set initial value
-            const valueDisplay = slider.previousElementSibling;
-            valueDisplay.textContent = `${valueDisplay.textContent.split(':')[0]}: ${slider.value}${slider.id.includes('fov') || slider.id.includes('render') || slider.id.includes('item') ? '' : '%'}`;
+            const valueDisplay = slider.previousElementSibling.previousElementSibling;
+            const progressBar = slider.previousElementSibling;
+            const max = parseInt(slider.max);
+            const min = parseInt(slider.min);
+            const value = parseInt(slider.value);
+            const percentage = ((value - min) / (max - min)) * 100;
+            
+            if (slider.id.includes('fov') || slider.id.includes('render') || slider.id.includes('item')) {
+                valueDisplay.querySelector('span').textContent = `${value}${slider.id.includes('fov') ? '°' : 'm'}`;
+            } else {
+                valueDisplay.querySelector('span').textContent = `${value}%`;
+            }
+            
+            progressBar.style.width = `${percentage}%`;
             
             // Update on change
             slider.addEventListener('input', () => {
-                valueDisplay.textContent = `${valueDisplay.textContent.split(':')[0]}: ${slider.value}${slider.id.includes('fov') || slider.id.includes('render') || slider.id.includes('item') ? '' : '%'}`;
+                const currentValue = parseInt(slider.value);
+                const currentPercentage = ((currentValue - min) / (max - min)) * 100;
+                
+                if (slider.id.includes('fov') || slider.id.includes('render') || slider.id.includes('item')) {
+                    valueDisplay.querySelector('span').textContent = `${currentValue}${slider.id.includes('fov') ? '°' : 'm'}`;
+                } else {
+                    valueDisplay.querySelector('span').textContent = `${currentValue}%`;
+                }
+                
+                progressBar.style.width = `${currentPercentage}%`;
+                
+                // Animate progress bar
+                progressBar.style.transition = 'width 0.2s ease';
+                setTimeout(() => {
+                    progressBar.style.transition = '';
+                }, 200);
             });
         });
         
@@ -877,7 +944,7 @@
         // Add smooth hover effect to control groups
         document.querySelectorAll('.control-group').forEach(group => {
             group.addEventListener('mouseenter', () => {
-                group.style.transform = 'translateY(-8px) scale(1.01)';
+                group.style.transform = 'translateY(-8px)';
             });
             
             group.addEventListener('mouseleave', () => {
