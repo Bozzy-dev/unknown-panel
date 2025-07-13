@@ -32,6 +32,27 @@
             --tooltip-bg: rgba(35, 30, 45, 0.9);
         }
 
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(15, 10, 25, 0.5);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-lilac);
+            border-radius: 10px;
+            border: 2px solid rgba(0, 0, 0, 0.2);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-lilac-light);
+        }
+
         body {
             background: linear-gradient(135deg, #070613, #15122b, #070613);
             color: var(--text-primary);
@@ -69,6 +90,131 @@
             z-index: -1;
         }
 
+        /* Login Panel Styles */
+        .login-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .login-box {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+            border: 1px solid var(--card-border);
+            text-align: center;
+            transform: scale(0.9);
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+
+        .login-box.show {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .login-title {
+            font-size: 24px;
+            margin-bottom: 25px;
+            color: var(--accent-lilac-light);
+            text-shadow: 0 0 10px rgba(200, 162, 255, 0.3);
+        }
+
+        .login-input {
+            width: 100%;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            background: var(--toggle-bg);
+            border: 1px solid var(--card-border);
+            color: var(--text-primary);
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .login-input:focus {
+            border-color: var(--accent-lilac);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(200, 162, 255, 0.3);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            border-radius: 10px;
+            background: linear-gradient(45deg, var(--accent-lilac), #a183d1);
+            color: white;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .login-btn:hover {
+            background: linear-gradient(45deg, var(--accent-lilac-light), #b193e1);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(180, 130, 240, 0.6);
+        }
+
+        .login-message {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: 500;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s ease;
+        }
+
+        .login-message.success {
+            background: rgba(46, 204, 113, 0.2);
+            border: 1px solid var(--success);
+            color: var(--success);
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .login-message.error {
+            background: rgba(231, 76, 60, 0.2);
+            border: 1px solid var(--danger);
+            color: var(--danger);
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+
+        .shake {
+            animation: shake 0.5s ease;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(46, 204, 113, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0); }
+        }
+
+        .pulse {
+            animation: pulse 1s ease;
+        }
+
         .main-container {
             width: 100%;
             max-width: 1100px;
@@ -79,6 +225,7 @@
             border: 1px solid var(--card-border);
             opacity: 1;
             transform: translateY(0);
+            display: none;
         }
 
         /* Header Styles */
@@ -561,6 +708,16 @@
             transform: scale(1.1);
         }
 
+        .color-input {
+            width: 100px;
+            padding: 8px;
+            background: var(--toggle-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 6px;
+            color: var(--text-primary);
+            text-align: center;
+        }
+
         /* Footer */
         footer {
             padding: 20px 35px;
@@ -649,6 +806,22 @@
 <body>
     <div class="blur-layer"></div>
     <div class="particles" id="particles"></div>
+    
+    <!-- Login Panel -->
+    <div class="login-container" id="loginContainer">
+        <div class="login-box" id="loginBox">
+            <div class="logo" style="justify-content: center; margin-bottom: 30px;">
+                <div class="logo-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h1>XPLO SUITE</h1>
+            </div>
+            <h2 class="login-title">ENTER LICENSE KEY</h2>
+            <input type="password" class="login-input" id="licenseKey" placeholder="Enter your license key">
+            <button class="login-btn" id="loginBtn">AUTHENTICATE</button>
+            <div class="login-message" id="loginMessage"></div>
+        </div>
+    </div>
     
     <div class="main-container" id="mainContainer">
         <header>
@@ -1542,26 +1715,76 @@
                 <div class="control-group">
                     <div class="color-picker">
                         <div class="color-label">Visible Color:</div>
-                        <div class="color-preview" style="background-color: rgb(131, 128, 237);"></div>
-                        <div>RGB(131, 128, 237)</div>
+                        <div class="color-preview" id="visibleColorPreview" style="background-color: rgb(131, 128, 237);"></div>
+                        <input type="text" class="color-input" id="visibleColorInput" value="rgb(131, 128, 237)" readonly>
                     </div>
                     
                     <div class="color-picker">
                         <div class="color-label">Invisible Color:</div>
-                        <div class="color-preview" style="background-color: rgb(250, 151, 30);"></div>
-                        <div>RGB(250, 151, 30)</div>
+                        <div class="color-preview" id="invisibleColorPreview" style="background-color: rgb(250, 151, 30);"></div>
+                        <input type="text" class="color-input" id="invisibleColorInput" value="rgb(250, 151, 30)" readonly>
                     </div>
                     
                     <div class="color-picker">
                         <div class="color-label">Team Color:</div>
-                        <div class="color-preview" style="background-color: rgb(0, 255, 0);"></div>
-                        <div>RGB(0, 255, 0)</div>
+                        <div class="color-preview" id="teamColorPreview" style="background-color: rgb(0, 255, 0);"></div>
+                        <input type="text" class="color-input" id="teamColorInput" value="rgb(0, 255, 0)" readonly>
                     </div>
                     
                     <div class="color-picker">
                         <div class="color-label">Downed Color:</div>
-                        <div class="color-preview" style="background-color: rgb(255, 255, 0);"></div>
-                        <div>RGB(255, 255, 0)</div>
+                        <div class="color-preview" id="downedColorPreview" style="background-color: rgb(255, 255, 0);"></div>
+                        <input type="text" class="color-input" id="downedColorInput" value="rgb(255, 255, 0)" readonly>
+                    </div>
+                    
+                    <div class="color-picker">
+                        <div class="color-label">Box Color:</div>
+                        <div class="color-preview" id="boxColorPreview" style="background-color: rgb(255, 0, 255);"></div>
+                        <input type="text" class="color-input" id="boxColorInput" value="rgb(255, 0, 255)" readonly>
+                    </div>
+                    
+                    <div class="color-picker">
+                        <div class="color-label">Skeleton Color:</div>
+                        <div class="color-preview" id="skeletonColorPreview" style="background-color: rgb(0, 255, 255);"></div>
+                        <input type="text" class="color-input" id="skeletonColorInput" value="rgb(0, 255, 255)" readonly>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <div class="color-picker">
+                        <div class="color-label">Text Color:</div>
+                        <div class="color-preview" id="textColorPreview" style="background-color: rgb(255, 255, 255);"></div>
+                        <input type="text" class="color-input" id="textColorInput" value="rgb(255, 255, 255)" readonly>
+                    </div>
+                    
+                    <div class="color-picker">
+                        <div class="color-label">Outline Color:</div>
+                        <div class="color-preview" id="outlineColorPreview" style="background-color: rgb(0, 0, 0);"></div>
+                        <input type="text" class="color-input" id="outlineColorInput" value="rgb(0, 0, 0)" readonly>
+                    </div>
+                    
+                    <div class="color-picker">
+                        <div class="color-label">FOV Circle Color:</div>
+                        <div class="color-preview" id="fovColorPreview" style="background-color: rgb(200, 162, 200);"></div>
+                        <input type="text" class="color-input" id="fovColorInput" value="rgb(200, 162, 200)" readonly>
+                    </div>
+                    
+                    <div class="color-picker">
+                        <div class="color-label">Radar Background:</div>
+                        <div class="color-preview" id="radarBgColorPreview" style="background-color: rgba(25, 23, 36, 0.7);"></div>
+                        <input type="text" class="color-input" id="radarBgColorInput" value="rgba(25, 23, 36, 0.7)" readonly>
+                    </div>
+                    
+                    <div class="color-picker">
+                        <div class="color-label">Radar Border:</div>
+                        <div class="color-preview" id="radarBorderColorPreview" style="background-color: rgb(90, 70, 120);"></div>
+                        <input type="text" class="color-input" id="radarBorderColorInput" value="rgb(90, 70, 120)" readonly>
+                    </div>
+                    
+                    <div class="color-picker">
+                        <div class="color-label">Radar Player:</div>
+                        <div class="color-preview" id="radarPlayerColorPreview" style="background-color: rgb(255, 255, 255);"></div>
+                        <input type="text" class="color-input" id="radarPlayerColorInput" value="rgb(255, 255, 255)" readonly>
                     </div>
                 </div>
             </div>
@@ -1581,6 +1804,164 @@
     </div>
 
     <script>
+        // Show login panel initially
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginBox = document.getElementById('loginBox');
+            setTimeout(() => {
+                loginBox.classList.add('show');
+            }, 100);
+            
+            // Focus the input field
+            document.getElementById('licenseKey').focus();
+        });
+
+        // Login functionality
+        document.getElementById('loginBtn').addEventListener('click', function() {
+            const licenseKey = document.getElementById('licenseKey').value;
+            const loginMessage = document.getElementById('loginMessage');
+            const loginContainer = document.getElementById('loginContainer');
+            const mainContainer = document.getElementById('mainContainer');
+            
+            // Clear any previous messages
+            loginMessage.className = 'login-message';
+            loginMessage.textContent = '';
+            
+            if (licenseKey.trim() === 'Bozzy') {
+                // Correct key
+                loginMessage.textContent = 'Authentication successful! Loading menu...';
+                loginMessage.classList.add('success');
+                
+                // Add pulse animation to login box
+                document.getElementById('loginBox').classList.add('pulse');
+                
+                // Hide login panel after delay
+                setTimeout(() => {
+                    loginContainer.style.opacity = '0';
+                    loginContainer.style.pointerEvents = 'none';
+                    mainContainer.style.display = 'block';
+                    
+                    // Initialize the rest of the app
+                    initApp();
+                }, 1500);
+            } else {
+                // Incorrect key
+                loginMessage.textContent = 'Invalid license key! Please try again.';
+                loginMessage.classList.add('error');
+                
+                // Add shake animation to login box
+                document.getElementById('loginBox').classList.add('shake');
+                
+                // Remove shake class after animation completes
+                setTimeout(() => {
+                    document.getElementById('loginBox').classList.remove('shake');
+                }, 500);
+            }
+        });
+
+        // Allow pressing Enter to submit
+        document.getElementById('licenseKey').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.getElementById('loginBtn').click();
+            }
+        });
+
+        // Initialize the main application
+        function initApp() {
+            // Create floating particles
+            createParticles();
+            
+            // Initialize color pickers
+            initColorPickers();
+            
+            // Tab functionality
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Remove active class from all tabs and content
+                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    tab.classList.add('active');
+                    
+                    // Show corresponding content
+                    const tabId = tab.getAttribute('data-tab');
+                    document.getElementById(`${tabId}-tab`).classList.add('active');
+                });
+            });
+            
+            // Update slider values and progress bars
+            document.querySelectorAll('.range-slider').forEach(slider => {
+                // Set initial value
+                const valueDisplay = slider.parentElement.previousElementSibling;
+                const progressBar = slider.previousElementSibling.previousElementSibling;
+                const thumb = slider.previousElementSibling;
+                const max = parseFloat(slider.max);
+                const min = parseFloat(slider.min);
+                const value = parseFloat(slider.value);
+                const percentage = ((value - min) / (max - min)) * 100;
+                
+                if (slider.id.includes('fov') || slider.id.includes('distance') || slider.id.includes('range')) {
+                    valueDisplay.querySelector('span').textContent = `${value}${slider.id.includes('fov') ? '°' : 'm'}`;
+                } else if (slider.id === 'smooth' || slider.id.includes('smooth') || slider.id.includes('thickness')) {
+                    valueDisplay.querySelector('span').textContent = `${value}`;
+                } else {
+                    valueDisplay.querySelector('span').textContent = `${value}%`;
+                }
+                
+                progressBar.style.width = `${percentage}%`;
+                thumb.style.left = `${percentage}%`;
+                
+                // Update on change
+                slider.addEventListener('input', () => {
+                    const currentValue = parseFloat(slider.value);
+                    const currentPercentage = ((currentValue - min) / (max - min)) * 100;
+                    
+                    if (slider.id.includes('fov') || slider.id.includes('distance') || slider.id.includes('range')) {
+                        valueDisplay.querySelector('span').textContent = `${currentValue}${slider.id.includes('fov') ? '°' : 'm'}`;
+                    } else if (slider.id === 'smooth' || slider.id.includes('smooth') || slider.id.includes('thickness')) {
+                        valueDisplay.querySelector('span').textContent = `${currentValue}`;
+                    } else {
+                        valueDisplay.querySelector('span').textContent = `${currentValue}%`;
+                    }
+                    
+                    progressBar.style.width = `${currentPercentage}%`;
+                    thumb.style.left = `${currentPercentage}%`;
+                    
+                    // Animate progress bar
+                    progressBar.style.transition = 'width 0.2s ease';
+                    setTimeout(() => {
+                        progressBar.style.transition = '';
+                    }, 200);
+                });
+            });
+            
+            // Button animations
+            document.querySelectorAll('.btn').forEach(btn => {
+                btn.addEventListener('mousedown', function() {
+                    this.style.transform = 'scale(0.95)';
+                });
+                
+                btn.addEventListener('mouseup', function() {
+                    this.style.transform = '';
+                });
+                
+                btn.addEventListener('mouseleave', function() {
+                    this.style.transform = '';
+                });
+            });
+            
+            // Add smooth hover effect to control groups
+            document.querySelectorAll('.control-group').forEach(group => {
+                group.addEventListener('mouseenter', () => {
+                    group.style.transform = 'translateY(-5px)';
+                });
+                
+                group.addEventListener('mouseleave', () => {
+                    group.style.transform = '';
+                });
+            });
+        }
+
         // Create floating particles
         function createParticles() {
             const particlesContainer = document.getElementById('particles');
@@ -1607,97 +1988,63 @@
                 particlesContainer.appendChild(particle);
             }
         }
-        
-        // Initialize particles
-        createParticles();
-        
-        // Tab functionality
-        document.querySelectorAll('.tab').forEach(tab => {
-            tab.addEventListener('click', () => {
-                // Remove active class from all tabs and content
-                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-                
-                // Add active class to clicked tab
-                tab.classList.add('active');
-                
-                // Show corresponding content
-                const tabId = tab.getAttribute('data-tab');
-                document.getElementById(`${tabId}-tab`).classList.add('active');
-            });
-        });
-        
-        // Update slider values and progress bars
-        document.querySelectorAll('.range-slider').forEach(slider => {
-            // Set initial value
-            const valueDisplay = slider.parentElement.previousElementSibling;
-            const progressBar = slider.previousElementSibling.previousElementSibling;
-            const thumb = slider.previousElementSibling;
-            const max = parseFloat(slider.max);
-            const min = parseFloat(slider.min);
-            const value = parseFloat(slider.value);
-            const percentage = ((value - min) / (max - min)) * 100;
+
+        // Initialize color pickers
+        function initColorPickers() {
+            // Create color picker inputs for each color preview
+            const colorPreviews = document.querySelectorAll('.color-preview');
             
-            if (slider.id.includes('fov') || slider.id.includes('distance') || slider.id.includes('range')) {
-                valueDisplay.querySelector('span').textContent = `${value}${slider.id.includes('fov') ? '°' : 'm'}`;
-            } else if (slider.id === 'smooth' || slider.id.includes('smooth') || slider.id.includes('thickness')) {
-                valueDisplay.querySelector('span').textContent = `${value}`;
-            } else {
-                valueDisplay.querySelector('span').textContent = `${value}%`;
-            }
-            
-            progressBar.style.width = `${percentage}%`;
-            thumb.style.left = `${percentage}%`;
-            
-            // Update on change
-            slider.addEventListener('input', () => {
-                const currentValue = parseFloat(slider.value);
-                const currentPercentage = ((currentValue - min) / (max - min)) * 100;
+            colorPreviews.forEach(preview => {
+                // Create a color picker input
+                const colorPicker = document.createElement('input');
+                colorPicker.type = 'color';
+                colorPicker.style.position = 'absolute';
+                colorPicker.style.opacity = '0';
+                colorPicker.style.width = '30px';
+                colorPicker.style.height = '30px';
+                colorPicker.style.cursor = 'pointer';
                 
-                if (slider.id.includes('fov') || slider.id.includes('distance') || slider.id.includes('range')) {
-                    valueDisplay.querySelector('span').textContent = `${currentValue}${slider.id.includes('fov') ? '°' : 'm'}`;
-                } else if (slider.id === 'smooth' || slider.id.includes('smooth') || slider.id.includes('thickness')) {
-                    valueDisplay.querySelector('span').textContent = `${currentValue}`;
-                } else {
-                    valueDisplay.querySelector('span').textContent = `${currentValue}%`;
+                // Set initial value based on the preview's background color
+                const bgColor = preview.style.backgroundColor;
+                if (bgColor) {
+                    // Convert rgb/rgba to hex
+                    const rgb = bgColor.match(/\d+/g);
+                    if (rgb) {
+                        let hex = '#';
+                        for (let i = 0; i < 3; i++) {
+                            hex += parseInt(rgb[i]).toString(16).padStart(2, '0');
+                        }
+                        colorPicker.value = hex;
+                    }
                 }
                 
-                progressBar.style.width = `${currentPercentage}%`;
-                thumb.style.left = `${currentPercentage}%`;
+                // Add event listener to update preview and input when color changes
+                colorPicker.addEventListener('input', function() {
+                    const hexColor = this.value;
+                    preview.style.backgroundColor = hexColor;
+                    
+                    // Convert hex to rgb
+                    const r = parseInt(hexColor.substr(1, 2), 16);
+                    const g = parseInt(hexColor.substr(3, 2), 16);
+                    const b = parseInt(hexColor.substr(5, 2), 16);
+                    
+                    // Update the text input
+                    const inputId = preview.id.replace('Preview', 'Input');
+                    const textInput = document.getElementById(inputId);
+                    if (textInput) {
+                        textInput.value = `rgb(${r}, ${g}, ${b})`;
+                    }
+                });
                 
-                // Animate progress bar
-                progressBar.style.transition = 'width 0.2s ease';
-                setTimeout(() => {
-                    progressBar.style.transition = '';
-                }, 200);
+                // Add click event to preview to trigger color picker
+                preview.addEventListener('click', function() {
+                    colorPicker.click();
+                });
+                
+                // Insert the color picker after the preview
+                preview.parentNode.insertBefore(colorPicker, preview.nextSibling);
             });
-        });
-        
-        // Button animations
-        document.querySelectorAll('.btn').forEach(btn => {
-            btn.addEventListener('mousedown', function() {
-                this.style.transform = 'scale(0.95)';
-            });
-            
-            btn.addEventListener('mouseup', function() {
-                this.style.transform = '';
-            });
-            
-            btn.addEventListener('mouseleave', function() {
-                this.style.transform = '';
-            });
-        });
-        
-        // Add smooth hover effect to control groups
-        document.querySelectorAll('.control-group').forEach(group => {
-            group.addEventListener('mouseenter', () => {
-                group.style.transform = 'translateY(-5px)';
-            });
-            
-            group.addEventListener('mouseleave', () => {
-                group.style.transform = '';
-            });
-        });
+        }
     </script>
 </body>
 </html>
