@@ -689,7 +689,6 @@
             align-items: center;
             gap: 15px;
             margin-bottom: 15px;
-            position: relative;
         }
 
         .color-label {
@@ -702,193 +701,21 @@
             border-radius: 6px;
             border: 1px solid var(--card-border);
             cursor: pointer;
-            transition: all 0.2s ease;
-            position: relative;
-            overflow: hidden;
+            transition: transform 0.2s ease;
         }
 
         .color-preview:hover {
             transform: scale(1.1);
-            box-shadow: 0 0 10px rgba(200, 162, 200, 0.5);
         }
 
         .color-input {
-            width: 120px;
-            padding: 8px 12px;
+            width: 100px;
+            padding: 8px;
             background: var(--toggle-bg);
             border: 1px solid var(--card-border);
             border-radius: 6px;
             color: var(--text-primary);
-            font-size: 14px;
-            transition: all 0.3s ease;
-        }
-
-        .color-input:focus {
-            border-color: var(--accent-lilac);
-            outline: none;
-            box-shadow: 0 0 0 2px rgba(200, 162, 255, 0.3);
-        }
-
-        /* Custom Color Picker */
-        .custom-color-picker {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(5px);
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .custom-color-picker.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .color-picker-container {
-            background: var(--card-bg);
-            border-radius: 15px;
-            padding: 25px;
-            width: 100%;
-            max-width: 350px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
-            border: 1px solid var(--card-border);
-            transform: translateY(20px);
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .custom-color-picker.active .color-picker-container {
-            transform: translateY(0);
-        }
-
-        .color-picker-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .color-picker-title {
-            font-size: 18px;
-            font-weight: 600;
-            color: var(--accent-lilac-light);
-        }
-
-        .color-picker-close {
-            background: none;
-            border: none;
-            color: var(--text-secondary);
-            font-size: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .color-picker-close:hover {
-            color: var(--accent-lilac);
-            transform: rotate(90deg);
-        }
-
-        .color-picker-body {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .color-picker-preview {
-            width: 100%;
-            height: 60px;
-            border-radius: 10px;
-            border: 1px solid var(--card-border);
-            margin-bottom: 10px;
-            transition: all 0.3s ease;
-        }
-
-        .color-picker-sliders {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .color-slider-container {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .color-slider-label {
-            width: 30px;
-            font-weight: 600;
-            color: var(--accent-lilac-light);
-        }
-
-        .color-slider-input {
-            flex: 1;
-            -webkit-appearance: none;
-            height: 6px;
-            background: var(--slider-bg);
-            border-radius: 3px;
-            outline: none;
-        }
-
-        .color-slider-input::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            background: white;
-            cursor: pointer;
-            border: 2px solid var(--accent-lilac);
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-        }
-
-        .color-slider-value {
-            width: 40px;
             text-align: center;
-            background: var(--toggle-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 5px;
-            padding: 5px;
-            font-size: 14px;
-        }
-
-        .color-picker-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .color-picker-btn {
-            flex: 1;
-            padding: 10px;
-            border-radius: 8px;
-            border: none;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .color-picker-btn.confirm {
-            background: linear-gradient(45deg, var(--accent-lilac), #a183d1);
-            color: white;
-        }
-
-        .color-picker-btn.cancel {
-            background: rgba(60, 50, 80, 0.5);
-            border: 1px solid var(--card-border);
-            color: var(--text-primary);
-        }
-
-        .color-picker-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
         /* Footer */
@@ -996,45 +823,6 @@
         </div>
     </div>
     
-    <!-- Custom Color Picker (hidden by default) -->
-    <div class="custom-color-picker" id="customColorPicker">
-        <div class="color-picker-container">
-            <div class="color-picker-header">
-                <div class="color-picker-title" id="colorPickerTitle">Pick a Color</div>
-                <button class="color-picker-close" id="colorPickerClose">&times;</button>
-            </div>
-            <div class="color-picker-body">
-                <div class="color-picker-preview" id="colorPickerPreview"></div>
-                <div class="color-picker-sliders">
-                    <div class="color-slider-container">
-                        <div class="color-slider-label">R</div>
-                        <input type="range" min="0" max="255" value="255" class="color-slider-input" id="redSlider">
-                        <input type="number" min="0" max="255" value="255" class="color-slider-value" id="redValue">
-                    </div>
-                    <div class="color-slider-container">
-                        <div class="color-slider-label">G</div>
-                        <input type="range" min="0" max="255" value="255" class="color-slider-input" id="greenSlider">
-                        <input type="number" min="0" max="255" value="255" class="color-slider-value" id="greenValue">
-                    </div>
-                    <div class="color-slider-container">
-                        <div class="color-slider-label">B</div>
-                        <input type="range" min="0" max="255" value="255" class="color-slider-input" id="blueSlider">
-                        <input type="number" min="0" max="255" value="255" class="color-slider-value" id="blueValue">
-                    </div>
-                    <div class="color-slider-container">
-                        <div class="color-slider-label">A</div>
-                        <input type="range" min="0" max="100" value="100" class="color-slider-input" id="alphaSlider">
-                        <input type="number" min="0" max="100" value="100" class="color-slider-value" id="alphaValue">
-                    </div>
-                </div>
-                <div class="color-picker-actions">
-                    <button class="color-picker-btn confirm" id="colorPickerConfirm">Confirm</button>
-                    <button class="color-picker-btn cancel" id="colorPickerCancel">Cancel</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    
     <div class="main-container" id="mainContainer">
         <header>
             <div class="logo">
@@ -1057,6 +845,869 @@
             <div class="tab" data-tab="colors">COLORS</div>
         </div>
 
+        <!-- AIMBOT TAB -->
+        <div class="tab-content active" id="aim-tab">
+            <h2 class="section-title"><i class="fas fa-crosshairs"></i> AIMBOT SETTINGS</h2>
+            <div class="controls-grid">
+                <div class="control-group">
+                    <div class="control-header">
+                        <div class="control-label">
+                            Aimbot
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Enable or disable the aimbot feature</div>
+                            </div>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            Sticky Aim
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Stick to target when locked on</div>
+                            </div>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="combo-box">
+                        <select>
+                            <option>Aim Type: Memory</option>
+                            <option>Aim Type: Silent</option>
+                            <option>Aim Type: RCS</option>
+                        </select>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            Prediction
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Predict target movement</div>
+                            </div>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            Visible Check
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Only target visible players</div>
+                            </div>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            Ignore Downed
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Ignore downed players</div>
+                            </div>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            Render FOV
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Show aimbot field of view circle</div>
+                            </div>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="slider-container">
+                        <div class="slider-value">FOV Radius: <span>15°</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 15%"></div>
+                            <div class="slider-thumb" style="left: 15%"></div>
+                            <input type="range" min="1" max="30" value="15" class="range-slider" id="fov-radius-slider">
+                        </div>
+                    </div>
+                    
+                    <div class="slider-container">
+                        <div class="slider-value">Smoothness: <span>5</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 10%"></div>
+                            <div class="slider-thumb" style="left: 10%"></div>
+                            <input type="range" min="1" max="50" value="5" class="range-slider" id="smooth-slider">
+                        </div>
+                    </div>
+                    
+                    <div class="combo-box">
+                        <select>
+                            <option>Hit Box: Head</option>
+                            <option>Hit Box: Neck</option>
+                            <option>Hit Box: Chest</option>
+                            <option>Hit Box: Pelvis</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <div class="control-header">
+                        <div class="control-label">
+                            Triggerbot
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Automatically fire when target is in crosshair</div>
+                            </div>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            Shotgun Only
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Only activate triggerbot with shotguns</div>
+                            </div>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            Ignore Keybind
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Triggerbot works without holding key</div>
+                            </div>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="slider-container">
+                        <div class="slider-value">Custom Delay: <span>100ms</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 50%"></div>
+                            <div class="slider-thumb" style="left: 50%"></div>
+                            <input type="range" min="0" max="200" value="100" class="range-slider" id="delay-slider">
+                        </div>
+                    </div>
+                    
+                    <div class="slider-container">
+                        <div class="slider-value">Max Distance: <span>15m</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 15%"></div>
+                            <div class="slider-thumb" style="left: 15%"></div>
+                            <input type="range" min="1" max="100" value="15" class="range-slider" id="distance-slider">
+                        </div>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            Humanization
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Add human-like imperfections to aim</div>
+                            </div>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="slider-container">
+                        <div class="slider-value">Mistake Size: <span>0</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 0%"></div>
+                            <div class="slider-thumb" style="left: 0%"></div>
+                            <input type="range" min="0" max="10" value="0" class="range-slider" id="mistake-slider">
+                        </div>
+                    </div>
+                    
+                    <div class="slider-container">
+                        <div class="slider-value">Mistake Correction: <span>0</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 0%"></div>
+                            <div class="slider-thumb" style="left: 0%"></div>
+                            <input type="range" min="0" max="10" value="0" class="range-slider" id="correction-slider">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- VISUALS TAB -->
+        <div class="tab-content" id="visual-tab">
+            <h2 class="section-title"><i class="fas fa-eye"></i> VISUAL SETTINGS</h2>
+            <div class="controls-grid">
+                <div class="control-group">
+                    <div class="control-header">
+                        <div class="control-label">
+                            Username
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Display player usernames</div>
+                            </div>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            Team ID Username
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Show team ID in username</div>
+                            </div>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            Rank
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Display player ranks</div>
+                            </div>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            Distance
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Show distance to players</div>
+                            </div>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            Held Weapon
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Show currently held weapon</div>
+                            </div>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            Platform
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Show player platform (PC/Console)</div>
+                            </div>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            Spectators
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Show spectator count</div>
+                            </div>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            Skeletons
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Display player skeletons</div>
+                            </div>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="combo-box">
+                        <select>
+                            <option>Skeleton Type: Normal</option>
+                            <option>Skeleton Type: Advanced</option>
+                            <option>Skeleton Type: Simple</option>
+                        </select>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            Skeleton Outline
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Add outline to skeletons</div>
+                            </div>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="slider-container">
+                        <div class="slider-value">Skeleton Thickness: <span>2</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 20%"></div>
+                            <div class="slider-thumb" style="left: 20%"></div>
+                            <input type="range" min="1" max="10" value="2" class="range-slider" id="skeleton-thickness">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <div class="control-header">
+                        <div class="control-label">
+                            Box
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Display boxes around players</div>
+                            </div>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            Filled Box
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Fill player boxes with color</div>
+                            </div>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="combo-box">
+                        <select>
+                            <option>Box Type: 2D</option>
+                            <option>Box Type: 3D</option>
+                            <option>Box Type: Corner</option>
+                        </select>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            Box Outline
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Add outline to player boxes</div>
+                            </div>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            Text Outline
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Add outline to text elements</div>
+                            </div>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="slider-container">
+                        <div class="slider-value">Box Thickness: <span>2</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 20%"></div>
+                            <div class="slider-thumb" style="left: 20%"></div>
+                            <input type="range" min="1" max="10" value="2" class="range-slider" id="box-thickness">
+                        </div>
+                    </div>
+                    
+                    <div class="slider-container">
+                        <div class="slider-value">Render Distance: <span>280m</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 70%"></div>
+                            <div class="slider-thumb" style="left: 70%"></div>
+                            <input type="range" min="50" max="400" value="280" class="range-slider" id="render-distance">
+                        </div>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            vSync
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Enable vertical sync for visuals</div>
+                            </div>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            Player TP
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Teleport to player position</div>
+                            </div>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            Snap Lines
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Draw lines to players</div>
+                            </div>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="combo-box">
+                        <select>
+                            <option>Snap Line Type: To Player</option>
+                            <option>Snap Line Type: From Bottom</option>
+                            <option>Snap Line Type: From Top</option>
+                        </select>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            Outline Lines
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Add outline to snap lines</div>
+                            </div>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="slider-container">
+                        <div class="slider-value">Line Thickness: <span>1</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 10%"></div>
+                            <div class="slider-thumb" style="left: 10%"></div>
+                            <input type="range" min="1" max="10" value="1" class="range-slider" id="line-thickness">
+                        </div>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            World ESP
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Show world items</div>
+                            </div>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="slider-container">
+                        <div class="slider-value">Loot Distance: <span>75m</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 75%"></div>
+                            <div class="slider-thumb" style="left: 75%"></div>
+                            <input type="range" min="10" max="200" value="75" class="range-slider" id="loot-distance">
+                        </div>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            ESP Down Check
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Check for downed players in ESP</div>
+                            </div>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            Aim Down Check
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Check for downed players in aimbot</div>
+                            </div>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RADAR TAB -->
+        <div class="tab-content" id="radar-tab">
+            <h2 class="section-title"><i class="fas fa-radar"></i> RADAR SETTINGS</h2>
+            <div class="controls-grid">
+                <div class="control-group">
+                    <div class="control-header">
+                        <div class="control-label">
+                            Radar
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Enable the radar feature</div>
+                            </div>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="slider-container">
+                        <div class="slider-value">Radar Range: <span>170m</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 85%"></div>
+                            <div class="slider-thumb" style="left: 85%"></div>
+                            <input type="range" min="50" max="200" value="170" class="range-slider" id="radar-range">
+                        </div>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            Show Distance
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Show distance on radar</div>
+                            </div>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            Show Platform
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Show platform on radar</div>
+                            </div>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            Show Team
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Show team members on radar</div>
+                            </div>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="control-header">
+                        <div class="control-label">
+                            Team ID Radar
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Show team ID on radar</div>
+                            </div>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- WEAPON CONFIG TAB -->
+        <div class="tab-content" id="weapon-tab">
+            <h2 class="section-title"><i class="fas fa-gun"></i> WEAPON CONFIGURATION</h2>
+            <div class="controls-grid">
+                <div class="control-group">
+                    <div class="control-header">
+                        <div class="control-label">
+                            Weapon Config
+                            <div class="tooltip-icon">
+                                <i class="fas fa-question-circle"></i>
+                                <div class="tooltip-text">Enable weapon-specific settings</div>
+                            </div>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="combo-box">
+                        <select>
+                            <option>Weapon Type: Assault Rifle</option>
+                            <option>Weapon Type: Shotgun</option>
+                            <option>Weapon Type: SMG</option>
+                            <option>Weapon Type: Pistol</option>
+                            <option>Weapon Type: Sniper</option>
+                        </select>
+                    </div>
+                    
+                    <div class="slider-container">
+                        <div class="slider-value">AR Smooth: <span>5</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 10%"></div>
+                            <div class="slider-thumb" style="left: 10%"></div>
+                            <input type="range" min="1" max="50" value="5" class="range-slider" id="ar-smooth">
+                        </div>
+                    </div>
+                    
+                    <div class="slider-container">
+                        <div class="slider-value">AR FOV: <span>10°</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 20%"></div>
+                            <div class="slider-thumb" style="left: 20%"></div>
+                            <input type="range" min="1" max="50" value="10" class="range-slider" id="ar-fov">
+                        </div>
+                    </div>
+                    
+                    <div class="slider-container">
+                        <div class="slider-value">Shotgun Smooth: <span>8</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 16%"></div>
+                            <div class="slider-thumb" style="left: 16%"></div>
+                            <input type="range" min="1" max="50" value="8" class="range-slider" id="shotgun-smooth">
+                        </div>
+                    </div>
+                    
+                    <div class="slider-container">
+                        <div class="slider-value">Shotgun FOV: <span>15°</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 30%"></div>
+                            <div class="slider-thumb" style="left: 30%"></div>
+                            <input type="range" min="1" max="50" value="15" class="range-slider" id="shotgun-fov">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <div class="slider-container">
+                        <div class="slider-value">SMG Smooth: <span>4</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 8%"></div>
+                            <div class="slider-thumb" style="left: 8%"></div>
+                            <input type="range" min="1" max="50" value="4" class="range-slider" id="smg-smooth">
+                        </div>
+                    </div>
+                    
+                    <div class="slider-container">
+                        <div class="slider-value">SMG FOV: <span>8°</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 16%"></div>
+                            <div class="slider-thumb" style="left: 16%"></div>
+                            <input type="range" min="1" max="50" value="8" class="range-slider" id="smg-fov">
+                        </div>
+                    </div>
+                    
+                    <div class="slider-container">
+                        <div class="slider-value">Pistol Smooth: <span>3</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 6%"></div>
+                            <div class="slider-thumb" style="left: 6%"></div>
+                            <input type="range" min="1" max="50" value="3" class="range-slider" id="pistol-smooth">
+                        </div>
+                    </div>
+                    
+                    <div class="slider-container">
+                        <div class="slider-value">Pistol FOV: <span>6°</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 12%"></div>
+                            <div class="slider-thumb" style="left: 12%"></div>
+                            <input type="range" min="1" max="50" value="6" class="range-slider" id="pistol-fov">
+                        </div>
+                    </div>
+                    
+                    <div class="slider-container">
+                        <div class="slider-value">Sniper Smooth: <span>2</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 4%"></div>
+                            <div class="slider-thumb" style="left: 4%"></div>
+                            <input type="range" min="1" max="50" value="2" class="range-slider" id="sniper-smooth">
+                        </div>
+                    </div>
+                    
+                    <div class="slider-container">
+                        <div class="slider-value">Sniper FOV: <span>3°</span></div>
+                        <div class="slider-track">
+                            <div class="slider-progress" style="width: 6%"></div>
+                            <div class="slider-thumb" style="left: 6%"></div>
+                            <input type="range" min="1" max="50" value="3" class="range-slider" id="sniper-fov">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- COLORS TAB -->
         <div class="tab-content" id="colors-tab">
             <h2 class="section-title"><i class="fas fa-palette"></i> COLOR SETTINGS</h2>
@@ -1075,9 +1726,65 @@
                     </div>
                     
                     <div class="color-picker">
+                        <div class="color-label">Team Color:</div>
+                        <div class="color-preview" id="teamColorPreview" style="background-color: rgb(0, 255, 0);"></div>
+                        <input type="text" class="color-input" id="teamColorInput" value="rgb(0, 255, 0)" readonly>
+                    </div>
+                    
+                    <div class="color-picker">
                         <div class="color-label">Downed Color:</div>
                         <div class="color-preview" id="downedColorPreview" style="background-color: rgb(255, 255, 0);"></div>
                         <input type="text" class="color-input" id="downedColorInput" value="rgb(255, 255, 0)" readonly>
+                    </div>
+                    
+                    <div class="color-picker">
+                        <div class="color-label">Box Color:</div>
+                        <div class="color-preview" id="boxColorPreview" style="background-color: rgb(255, 0, 255);"></div>
+                        <input type="text" class="color-input" id="boxColorInput" value="rgb(255, 0, 255)" readonly>
+                    </div>
+                    
+                    <div class="color-picker">
+                        <div class="color-label">Skeleton Color:</div>
+                        <div class="color-preview" id="skeletonColorPreview" style="background-color: rgb(0, 255, 255);"></div>
+                        <input type="text" class="color-input" id="skeletonColorInput" value="rgb(0, 255, 255)" readonly>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <div class="color-picker">
+                        <div class="color-label">Text Color:</div>
+                        <div class="color-preview" id="textColorPreview" style="background-color: rgb(255, 255, 255);"></div>
+                        <input type="text" class="color-input" id="textColorInput" value="rgb(255, 255, 255)" readonly>
+                    </div>
+                    
+                    <div class="color-picker">
+                        <div class="color-label">Outline Color:</div>
+                        <div class="color-preview" id="outlineColorPreview" style="background-color: rgb(0, 0, 0);"></div>
+                        <input type="text" class="color-input" id="outlineColorInput" value="rgb(0, 0, 0)" readonly>
+                    </div>
+                    
+                    <div class="color-picker">
+                        <div class="color-label">FOV Circle Color:</div>
+                        <div class="color-preview" id="fovColorPreview" style="background-color: rgb(200, 162, 200);"></div>
+                        <input type="text" class="color-input" id="fovColorInput" value="rgb(200, 162, 200)" readonly>
+                    </div>
+                    
+                    <div class="color-picker">
+                        <div class="color-label">Radar Background:</div>
+                        <div class="color-preview" id="radarBgColorPreview" style="background-color: rgba(25, 23, 36, 0.7);"></div>
+                        <input type="text" class="color-input" id="radarBgColorInput" value="rgba(25, 23, 36, 0.7)" readonly>
+                    </div>
+                    
+                    <div class="color-picker">
+                        <div class="color-label">Radar Border:</div>
+                        <div class="color-preview" id="radarBorderColorPreview" style="background-color: rgb(90, 70, 120);"></div>
+                        <input type="text" class="color-input" id="radarBorderColorInput" value="rgb(90, 70, 120)" readonly>
+                    </div>
+                    
+                    <div class="color-picker">
+                        <div class="color-label">Radar Player:</div>
+                        <div class="color-preview" id="radarPlayerColorPreview" style="background-color: rgb(255, 255, 255);"></div>
+                        <input type="text" class="color-input" id="radarPlayerColorInput" value="rgb(255, 255, 255)" readonly>
                     </div>
                 </div>
             </div>
@@ -1284,129 +1991,58 @@
 
         // Initialize color pickers
         function initColorPickers() {
-            const colorPicker = document.getElementById('customColorPicker');
-            const colorPickerClose = document.getElementById('colorPickerClose');
-            const colorPickerCancel = document.getElementById('colorPickerCancel');
-            const colorPickerConfirm = document.getElementById('colorPickerConfirm');
-            const colorPickerPreview = document.getElementById('colorPickerPreview');
+            // Create color picker inputs for each color preview
+            const colorPreviews = document.querySelectorAll('.color-preview');
             
-            // Color sliders
-            const redSlider = document.getElementById('redSlider');
-            const greenSlider = document.getElementById('greenSlider');
-            const blueSlider = document.getElementById('blueSlider');
-            const alphaSlider = document.getElementById('alphaSlider');
-            
-            // Color values
-            const redValue = document.getElementById('redValue');
-            const greenValue = document.getElementById('greenValue');
-            const blueValue = document.getElementById('blueValue');
-            const alphaValue = document.getElementById('alphaValue');
-            
-            // Current color being edited
-            let currentColorElement = null;
-            let currentColorInput = null;
-            
-            // Update color preview when sliders change
-            function updateColorPreview() {
-                const r = redSlider.value;
-                const g = greenSlider.value;
-                const b = blueSlider.value;
-                const a = alphaSlider.value / 100;
+            colorPreviews.forEach(preview => {
+                // Create a color picker input
+                const colorPicker = document.createElement('input');
+                colorPicker.type = 'color';
+                colorPicker.style.position = 'absolute';
+                colorPicker.style.opacity = '0';
+                colorPicker.style.width = '30px';
+                colorPicker.style.height = '30px';
+                colorPicker.style.cursor = 'pointer';
                 
-                colorPickerPreview.style.backgroundColor = `rgba(${r}, ${g}, ${b}, ${a})`;
-                
-                // Update the number inputs
-                redValue.value = r;
-                greenValue.value = g;
-                blueValue.value = b;
-                alphaValue.value = a * 100;
-            }
-            
-            // Update number inputs when sliders change
-            redSlider.addEventListener('input', updateColorPreview);
-            greenSlider.addEventListener('input', updateColorPreview);
-            blueSlider.addEventListener('input', updateColorPreview);
-            alphaSlider.addEventListener('input', updateColorPreview);
-            
-            // Update sliders when number inputs change
-            redValue.addEventListener('input', function() {
-                redSlider.value = this.value;
-                updateColorPreview();
-            });
-            
-            greenValue.addEventListener('input', function() {
-                greenSlider.value = this.value;
-                updateColorPreview();
-            });
-            
-            blueValue.addEventListener('input', function() {
-                blueSlider.value = this.value;
-                updateColorPreview();
-            });
-            
-            alphaValue.addEventListener('input', function() {
-                alphaSlider.value = this.value;
-                updateColorPreview();
-            });
-            
-            // Close color picker
-            function closeColorPicker() {
-                colorPicker.classList.remove('active');
-            }
-            
-            colorPickerClose.addEventListener('click', closeColorPicker);
-            colorPickerCancel.addEventListener('click', closeColorPicker);
-            
-            // Confirm color selection
-            colorPickerConfirm.addEventListener('click', function() {
-                if (currentColorElement && currentColorInput) {
-                    const r = redSlider.value;
-                    const g = greenSlider.value;
-                    const b = blueSlider.value;
-                    const a = alphaSlider.value / 100;
-                    
-                    const colorString = a < 1 ? `rgba(${r}, ${g}, ${b}, ${a})` : `rgb(${r}, ${g}, ${b})`;
-                    
-                    currentColorElement.style.backgroundColor = colorString;
-                    currentColorInput.value = colorString;
+                // Set initial value based on the preview's background color
+                const bgColor = preview.style.backgroundColor;
+                if (bgColor) {
+                    // Convert rgb/rgba to hex
+                    const rgb = bgColor.match(/\d+/g);
+                    if (rgb) {
+                        let hex = '#';
+                        for (let i = 0; i < 3; i++) {
+                            hex += parseInt(rgb[i]).toString(16).padStart(2, '0');
+                        }
+                        colorPicker.value = hex;
+                    }
                 }
-                closeColorPicker();
-            });
-            
-            // Open color picker when clicking on a color preview
-            document.querySelectorAll('.color-preview').forEach(preview => {
-                preview.addEventListener('click', function() {
-                    // Get the current color
-                    const bgColor = this.style.backgroundColor || 'rgb(255, 255, 255)';
-                    const colorMatch = bgColor.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)/);
+                
+                // Add event listener to update preview and input when color changes
+                colorPicker.addEventListener('input', function() {
+                    const hexColor = this.value;
+                    preview.style.backgroundColor = hexColor;
                     
-                    if (colorMatch) {
-                        const r = colorMatch[1];
-                        const g = colorMatch[2];
-                        const b = colorMatch[3];
-                        const a = colorMatch[4] ? Math.round(parseFloat(colorMatch[4]) * 100) : 100;
-                        
-                        // Set the sliders
-                        redSlider.value = r;
-                        greenSlider.value = g;
-                        blueSlider.value = b;
-                        alphaSlider.value = a;
-                        
-                        // Update the preview
-                        updateColorPreview();
-                        
-                        // Set the title
-                        const label = this.parentElement.querySelector('.color-label').textContent;
-                        document.getElementById('colorPickerTitle').textContent = `Pick ${label}`;
-                        
-                        // Store which color we're editing
-                        currentColorElement = this;
-                        currentColorInput = this.nextElementSibling;
-                        
-                        // Show the color picker
-                        colorPicker.classList.add('active');
+                    // Convert hex to rgb
+                    const r = parseInt(hexColor.substr(1, 2), 16);
+                    const g = parseInt(hexColor.substr(3, 2), 16);
+                    const b = parseInt(hexColor.substr(5, 2), 16);
+                    
+                    // Update the text input
+                    const inputId = preview.id.replace('Preview', 'Input');
+                    const textInput = document.getElementById(inputId);
+                    if (textInput) {
+                        textInput.value = `rgb(${r}, ${g}, ${b})`;
                     }
                 });
+                
+                // Add click event to preview to trigger color picker
+                preview.addEventListener('click', function() {
+                    colorPicker.click();
+                });
+                
+                // Insert the color picker after the preview
+                preview.parentNode.insertBefore(colorPicker, preview.nextSibling);
             });
         }
     </script>
