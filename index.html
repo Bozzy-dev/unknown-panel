@@ -1718,73 +1718,15 @@
                         <div class="color-preview" id="visibleColorPreview" style="background-color: rgb(131, 128, 237);"></div>
                         <input type="text" class="color-input" id="visibleColorInput" value="rgb(131, 128, 237)" readonly>
                     </div>
-                    
                     <div class="color-picker">
                         <div class="color-label">Invisible Color:</div>
                         <div class="color-preview" id="invisibleColorPreview" style="background-color: rgb(250, 151, 30);"></div>
                         <input type="text" class="color-input" id="invisibleColorInput" value="rgb(250, 151, 30)" readonly>
                     </div>
-                    
-                    <div class="color-picker">
-                        <div class="color-label">Team Color:</div>
-                        <div class="color-preview" id="teamColorPreview" style="background-color: rgb(0, 255, 0);"></div>
-                        <input type="text" class="color-input" id="teamColorInput" value="rgb(0, 255, 0)" readonly>
-                    </div>
-                    
                     <div class="color-picker">
                         <div class="color-label">Downed Color:</div>
                         <div class="color-preview" id="downedColorPreview" style="background-color: rgb(255, 255, 0);"></div>
                         <input type="text" class="color-input" id="downedColorInput" value="rgb(255, 255, 0)" readonly>
-                    </div>
-                    
-                    <div class="color-picker">
-                        <div class="color-label">Box Color:</div>
-                        <div class="color-preview" id="boxColorPreview" style="background-color: rgb(255, 0, 255);"></div>
-                        <input type="text" class="color-input" id="boxColorInput" value="rgb(255, 0, 255)" readonly>
-                    </div>
-                    
-                    <div class="color-picker">
-                        <div class="color-label">Skeleton Color:</div>
-                        <div class="color-preview" id="skeletonColorPreview" style="background-color: rgb(0, 255, 255);"></div>
-                        <input type="text" class="color-input" id="skeletonColorInput" value="rgb(0, 255, 255)" readonly>
-                    </div>
-                </div>
-                
-                <div class="control-group">
-                    <div class="color-picker">
-                        <div class="color-label">Text Color:</div>
-                        <div class="color-preview" id="textColorPreview" style="background-color: rgb(255, 255, 255);"></div>
-                        <input type="text" class="color-input" id="textColorInput" value="rgb(255, 255, 255)" readonly>
-                    </div>
-                    
-                    <div class="color-picker">
-                        <div class="color-label">Outline Color:</div>
-                        <div class="color-preview" id="outlineColorPreview" style="background-color: rgb(0, 0, 0);"></div>
-                        <input type="text" class="color-input" id="outlineColorInput" value="rgb(0, 0, 0)" readonly>
-                    </div>
-                    
-                    <div class="color-picker">
-                        <div class="color-label">FOV Circle Color:</div>
-                        <div class="color-preview" id="fovColorPreview" style="background-color: rgb(200, 162, 200);"></div>
-                        <input type="text" class="color-input" id="fovColorInput" value="rgb(200, 162, 200)" readonly>
-                    </div>
-                    
-                    <div class="color-picker">
-                        <div class="color-label">Radar Background:</div>
-                        <div class="color-preview" id="radarBgColorPreview" style="background-color: rgba(25, 23, 36, 0.7);"></div>
-                        <input type="text" class="color-input" id="radarBgColorInput" value="rgba(25, 23, 36, 0.7)" readonly>
-                    </div>
-                    
-                    <div class="color-picker">
-                        <div class="color-label">Radar Border:</div>
-                        <div class="color-preview" id="radarBorderColorPreview" style="background-color: rgb(90, 70, 120);"></div>
-                        <input type="text" class="color-input" id="radarBorderColorInput" value="rgb(90, 70, 120)" readonly>
-                    </div>
-                    
-                    <div class="color-picker">
-                        <div class="color-label">Radar Player:</div>
-                        <div class="color-preview" id="radarPlayerColorPreview" style="background-color: rgb(255, 255, 255);"></div>
-                        <input type="text" class="color-input" id="radarPlayerColorInput" value="rgb(255, 255, 255)" readonly>
                     </div>
                 </div>
             </div>
@@ -2012,16 +1954,21 @@
                     <div class="ccp-header">Pick a Color</div>
                     <div class="ccp-body">
                         <div class="ccp-sv-container">
-                            <canvas id="ccp-sv" width="180" height="180"></canvas>
+                            <canvas id="ccp-sv" width="240" height="240"></canvas>
                             <div id="ccp-sv-cursor"></div>
                         </div>
                         <div class="ccp-hue-container">
-                            <canvas id="ccp-hue" width="180" height="18"></canvas>
+                            <canvas id="ccp-hue" width="240" height="22"></canvas>
                             <div id="ccp-hue-cursor"></div>
                         </div>
                         <div class="ccp-preview-row">
                             <div class="ccp-preview" id="ccp-preview"></div>
-                            <input class="ccp-hex" id="ccp-hex" maxlength="7" />
+                            <input class="ccp-rgb" id="ccp-rgb" readonly />
+                        </div>
+                        <div class="ccp-rgb-inputs">
+                            <label>R <input type="number" id="ccp-r" min="0" max="255" /></label>
+                            <label>G <input type="number" id="ccp-g" min="0" max="255" /></label>
+                            <label>B <input type="number" id="ccp-b" min="0" max="255" /></label>
                         </div>
                     </div>
                     <div class="ccp-actions">
@@ -2083,9 +2030,9 @@
             // Draw hue bar
             const hueCanvas = document.getElementById('ccp-hue');
             const hueCtx = hueCanvas.getContext('2d');
-            for(let i=0;i<180;i++){
-                hueCtx.fillStyle = `hsl(${i*2},100%,50%)`;
-                hueCtx.fillRect(i,0,1,18);
+            for(let i=0;i<240;i++){
+                hueCtx.fillStyle = `hsl(${i*1.5},100%,50%)`;
+                hueCtx.fillRect(i,0,1,22);
             }
             // Draw SV box
             function drawSV(){
@@ -2108,19 +2055,22 @@
             function updateCursors(){
                 // SV
                 let svCursor = document.getElementById('ccp-sv-cursor');
-                svCursor.style.left = (currentHSV.s*180-8)+"px";
-                svCursor.style.top = ((1-currentHSV.v)*180-8)+"px";
+                svCursor.style.left = (currentHSV.s*240-10)+"px";
+                svCursor.style.top = ((1-currentHSV.v)*240-10)+"px";
                 // Hue
                 let hueCursor = document.getElementById('ccp-hue-cursor');
-                hueCursor.style.left = (currentHSV.h/2-6)+"px";
+                hueCursor.style.left = (currentHSV.h/1.5-8)+"px";
             }
             updateCursors();
 
-            // Update preview and hex
+            // Update preview and rgb
             function updatePreview(){
                 let [r,g,b] = hsvToRgb(currentHSV.h,currentHSV.s,currentHSV.v);
                 document.getElementById('ccp-preview').style.background = `rgb(${r},${g},${b})`;
-                document.getElementById('ccp-hex').value = rgbToHex(r,g,b);
+                document.getElementById('ccp-rgb').value = `rgb(${r}, ${g}, ${b})`;
+                document.getElementById('ccp-r').value = r;
+                document.getElementById('ccp-g').value = g;
+                document.getElementById('ccp-b').value = b;
             }
             updatePreview();
 
@@ -2129,10 +2079,10 @@
             sv.addEventListener('mousedown', function(e){
                 function move(ev){
                     const rect = sv.getBoundingClientRect();
-                    let x = Math.min(Math.max(ev.clientX-rect.left,0),180);
-                    let y = Math.min(Math.max(ev.clientY-rect.top,0),180);
-                    currentHSV.s = x/180;
-                    currentHSV.v = 1-y/180;
+                    let x = Math.min(Math.max(ev.clientX-rect.left,0),240);
+                    let y = Math.min(Math.max(ev.clientY-rect.top,0),240);
+                    currentHSV.s = x/240;
+                    currentHSV.v = 1-y/240;
                     updateCursors();
                     updatePreview();
                 }
@@ -2149,8 +2099,8 @@
             hue.addEventListener('mousedown', function(e){
                 function move(ev){
                     const rect = hue.getBoundingClientRect();
-                    let x = Math.min(Math.max(ev.clientX-rect.left,0),180);
-                    currentHSV.h = x*2;
+                    let x = Math.min(Math.max(ev.clientX-rect.left,0),240);
+                    currentHSV.h = x*1.5;
                     drawSV();
                     updateCursors();
                     updatePreview();
@@ -2163,18 +2113,21 @@
                 window.addEventListener('mousemove',move);
                 window.addEventListener('mouseup',up);
             });
-            // Hex input
-            document.getElementById('ccp-hex').addEventListener('input',function(){
-                let val = this.value;
-                if(/^#([0-9a-fA-F]{6})$/.test(val)){
-                    let [r,g,b] = hexToRgb(val);
-                    let [h,s,v] = rgbToHsv(r,g,b);
-                    currentHSV = {h,s,v};
-                    drawSV();
-                    updateCursors();
-                    updatePreview();
-                }
+            // RGB input events
+            function clamp(v){return Math.max(0,Math.min(255,parseInt(v)||0));}
+            document.getElementById('ccp-r').addEventListener('input',function(){
+                let r=clamp(this.value),g=clamp(document.getElementById('ccp-g').value),b=clamp(document.getElementById('ccp-b').value);
+                let [h,s,v]=rgbToHsv(r,g,b);currentHSV={h,s,v};drawSV();updateCursors();updatePreview();
             });
+            document.getElementById('ccp-g').addEventListener('input',function(){
+                let r=clamp(document.getElementById('ccp-r').value),g=clamp(this.value),b=clamp(document.getElementById('ccp-b').value);
+                let [h,s,v]=rgbToHsv(r,g,b);currentHSV={h,s,v};drawSV();updateCursors();updatePreview();
+            });
+            document.getElementById('ccp-b').addEventListener('input',function(){
+                let r=clamp(document.getElementById('ccp-r').value),g=clamp(document.getElementById('ccp-g').value),b=clamp(this.value);
+                let [h,s,v]=rgbToHsv(r,g,b);currentHSV={h,s,v};drawSV();updateCursors();updatePreview();
+            });
+
             // Confirm/cancel
             document.getElementById('ccp-cancel').onclick = closeModal;
             document.getElementById('ccp-backdrop')?.addEventListener('click',closeModal);
@@ -2210,11 +2163,11 @@
                 background: rgba(20,15,30,0.45);backdrop-filter: blur(8px);z-index:0;
             }
             .ccp-modal {
-                position: relative; z-index: 1; min-width: 260px; max-width: 320px;
+                position: relative; z-index: 1; min-width: 320px; max-width: 400px;
                 background: var(--glass-bg,rgba(20,15,30,0.85));
                 border-radius: 18px; box-shadow: 0 8px 32px rgba(0,0,0,0.45);
                 border: 1.5px solid var(--accent-lilac, #c8a2c8);
-                padding: 28px 24px 18px 24px;
+                padding: 32px 28px 20px 28px;
                 display: flex; flex-direction: column; gap: 18px;
                 animation: ccp-fadein 0.35s cubic-bezier(.4,1.6,.6,1) both;
                 transform: scale(0.92); opacity: 0;
@@ -2228,41 +2181,54 @@
                 to { opacity: 1; transform: scale(1); }
             }
             .ccp-header {
-                font-size: 20px; color: var(--accent-lilac-light,#d8b9f8);
+                font-size: 22px; color: var(--accent-lilac-light,#d8b9f8);
                 text-align: center; margin-bottom: 6px; font-weight: 600;
                 letter-spacing: 0.5px;
             }
-            .ccp-body { display: flex; flex-direction: column; gap: 16px; align-items: center; }
-            .ccp-sv-container { position: relative; width: 180px; height: 180px; }
-            #ccp-sv { border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.18); }
+            .ccp-body { display: flex; flex-direction: column; gap: 18px; align-items: center; }
+            .ccp-sv-container { position: relative; width: 240px; height: 240px; }
+            #ccp-sv { border-radius: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.18); }
             #ccp-sv-cursor {
-                position: absolute; width: 16px; height: 16px; border: 2px solid var(--accent-lilac,#c8a2c8);
+                position: absolute; width: 20px; height: 20px; border: 2.5px solid var(--accent-lilac,#c8a2c8);
                 border-radius: 50%; pointer-events: none; box-shadow: 0 0 0 2px #fff, 0 2px 8px rgba(0,0,0,0.18);
                 background: transparent; left: 0; top: 0; transition: left 0.08s, top 0.08s;
             }
-            .ccp-hue-container { position: relative; width: 180px; height: 18px; margin-top: 10px; }
-            #ccp-hue { border-radius: 8px; }
+            .ccp-hue-container { position: relative; width: 240px; height: 22px; margin-top: 12px; }
+            #ccp-hue { border-radius: 10px; }
             #ccp-hue-cursor {
-                position: absolute; top: -2px; width: 12px; height: 22px;
-                border: 2px solid var(--accent-lilac,#c8a2c8); border-radius: 6px;
+                position: absolute; top: -2px; width: 16px; height: 26px;
+                border: 2.5px solid var(--accent-lilac,#c8a2c8); border-radius: 8px;
                 background: rgba(255,255,255,0.7); left: 0; pointer-events: none;
                 box-shadow: 0 0 0 2px #fff, 0 2px 8px rgba(0,0,0,0.12);
                 transition: left 0.08s;
             }
-            .ccp-preview-row { display: flex; align-items: center; gap: 16px; margin-top: 10px; }
+            .ccp-preview-row { display: flex; align-items: center; gap: 18px; margin-top: 12px; }
             .ccp-preview {
-                width: 38px; height: 38px; border-radius: 10px;
-                border: 2px solid var(--accent-lilac,#c8a2c8); box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+                width: 48px; height: 48px; border-radius: 12px;
+                border: 2.5px solid var(--accent-lilac,#c8a2c8); box-shadow: 0 2px 8px rgba(0,0,0,0.18);
             }
-            .ccp-hex {
-                width: 80px; padding: 7px 10px; border-radius: 8px;
+            .ccp-rgb {
+                width: 120px; padding: 8px 12px; border-radius: 8px;
                 background: var(--toggle-bg,#3a3a4a); border: 1px solid var(--card-border,rgba(90,70,120,0.3));
-                color: var(--text-primary,#f0f0ff); font-size: 15px; text-align: center;
+                color: var(--text-primary,#f0f0ff); font-size: 16px; text-align: center;
                 outline: none; transition: border 0.2s;
             }
-            .ccp-hex:focus { border: 1.5px solid var(--accent-lilac,#c8a2c8); }
-            .ccp-actions { display: flex; justify-content: flex-end; gap: 12px; margin-top: 18px; }
-            #ccp-cancel, #ccp-confirm { min-width: 80px; }
+            .ccp-rgb-inputs {
+                display: flex; gap: 10px; margin-top: 8px; justify-content: center;
+            }
+            .ccp-rgb-inputs label {
+                color: var(--accent-lilac-light,#d8b9f8); font-size: 15px; font-weight: 500;
+                display: flex; flex-direction: column; align-items: center;
+            }
+            .ccp-rgb-inputs input[type=number] {
+                width: 48px; padding: 6px 0; border-radius: 7px;
+                background: var(--toggle-bg,#3a3a4a); border: 1px solid var(--card-border,rgba(90,70,120,0.3));
+                color: var(--text-primary,#f0f0ff); font-size: 15px; text-align: center;
+                outline: none; margin-top: 2px; transition: border 0.2s;
+            }
+            .ccp-rgb-inputs input[type=number]:focus { border: 1.5px solid var(--accent-lilac,#c8a2c8); }
+            .ccp-actions { display: flex; justify-content: flex-end; gap: 14px; margin-top: 22px; }
+            #ccp-cancel, #ccp-confirm { min-width: 90px; }
             `;
             document.head.appendChild(style);
         }
