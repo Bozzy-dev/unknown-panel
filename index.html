@@ -597,14 +597,23 @@
         .combo-box select {
             width: 100%;
             padding: 14px 20px;
-            border-radius: 10px;
-            background: var(--toggle-bg);
-            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            background: rgba(35, 30, 45, 0.45);
+            border: 1.5px solid var(--accent-lilac);
             color: var(--text-primary);
             appearance: none;
             cursor: pointer;
-            font-size: 15px;
-            transition: all 0.3s ease;
+            font-size: 16px;
+            box-shadow: 0 0 12px 2px rgba(200,162,255,0.10);
+            backdrop-filter: blur(10px) saturate(1.1);
+            -webkit-backdrop-filter: blur(10px) saturate(1.1);
+            transition: border 0.25s, box-shadow 0.25s, background 0.25s;
+        }
+
+        .combo-box select:focus, .combo-box select:hover {
+            border: 1.5px solid var(--accent-lilac-light);
+            box-shadow: 0 0 18px 4px rgba(200,162,255,0.18);
+            background: rgba(35, 30, 45, 0.60);
         }
 
         .combo-box::after {
@@ -621,13 +630,39 @@
         }
 
         .combo-box select:focus {
-            border-color: var(--accent-lilac);
+            border-color: var(--accent-lilac-light);
             outline: none;
-            box-shadow: 0 0 0 2px rgba(200, 162, 255, 0.3);
+            box-shadow: 0 0 0 2px rgba(200, 162, 255, 0.18);
         }
 
         .combo-box:hover::after {
             color: var(--accent-lilac);
+        }
+
+        /* Custom Scrollbar for all scrollable areas */
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+            background: rgba(15, 10, 25, 0.18);
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(15, 10, 25, 0.28);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, var(--accent-lilac), var(--accent-lilac-light));
+            border-radius: 10px;
+            border: 2px solid rgba(0, 0, 0, 0.12);
+            box-shadow: 0 2px 8px rgba(200,162,255,0.10);
+            transition: background 0.3s;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, var(--accent-lilac-light), #fff);
+        }
+        /* For Firefox */
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent-lilac) rgba(15, 10, 25, 0.18);
         }
 
         /* Enhanced Slider Design */
@@ -909,8 +944,6 @@
                     <div class="combo-box">
                         <select>
                             <option>Aim Type: Memory</option>
-                            <option>Aim Type: Silent</option>
-                            <option>Aim Type: RCS</option>
                         </select>
                     </div>
                     
@@ -2256,3 +2289,4 @@
     </script>
 </body>
 </html>
+
