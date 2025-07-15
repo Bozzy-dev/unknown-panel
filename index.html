@@ -704,6 +704,12 @@
             transition: transform 0.2s ease;
         }
 
+        .color-preview-large {
+            width: 38px;
+            height: 38px;
+            border-radius: 8px;
+        }
+
         .color-preview:hover {
             transform: scale(1.1);
         }
@@ -1715,18 +1721,15 @@
                 <div class="control-group">
                     <div class="color-picker">
                         <div class="color-label">Visible Color:</div>
-                        <div class="color-preview" id="visibleColorPreview" style="background-color: rgb(131, 128, 237);"></div>
-                        <input type="text" class="color-input" id="visibleColorInput" value="rgb(131, 128, 237)" readonly>
+                        <div class="color-preview color-preview-large" id="visibleColorPreview" style="background-color: rgb(131, 128, 237);"></div>
                     </div>
                     <div class="color-picker">
                         <div class="color-label">Invisible Color:</div>
-                        <div class="color-preview" id="invisibleColorPreview" style="background-color: rgb(250, 151, 30);"></div>
-                        <input type="text" class="color-input" id="invisibleColorInput" value="rgb(250, 151, 30)" readonly>
+                        <div class="color-preview color-preview-large" id="invisibleColorPreview" style="background-color: rgb(250, 151, 30);"></div>
                     </div>
                     <div class="color-picker">
                         <div class="color-label">Downed Color:</div>
-                        <div class="color-preview" id="downedColorPreview" style="background-color: rgb(255, 255, 0);"></div>
-                        <input type="text" class="color-input" id="downedColorInput" value="rgb(255, 255, 0)" readonly>
+                        <div class="color-preview color-preview-large" id="downedColorPreview" style="background-color: rgb(255, 255, 0);"></div>
                     </div>
                 </div>
             </div>
