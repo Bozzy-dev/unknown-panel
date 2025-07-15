@@ -54,7 +54,9 @@
         }
 
         body {
-            background: linear-gradient(135deg, #070613, #15122b, #070613);
+            background: linear-gradient(120deg, #070613 0%, #15122b 40%, #c8a2c8 100%),
+                        radial-gradient(circle at 20% 30%, rgba(100, 70, 150, 0.18) 0%, transparent 40%),
+                        radial-gradient(circle at 80% 70%, rgba(70, 40, 120, 0.18) 0%, transparent 40%);
             color: var(--text-primary);
             min-height: 100vh;
             display: flex;
@@ -106,7 +108,7 @@
         }
 
         .login-box {
-            background: rgba(25, 23, 36, 0.38);
+            background: rgba(25, 23, 36, 0.18);
             border-radius: 18px;
             padding: 44px 40px 40px 40px;
             width: 100%;
@@ -117,8 +119,8 @@
             transform: scale(0.9);
             opacity: 0;
             transition: all 0.4s ease;
-            backdrop-filter: blur(36px) saturate(1.3);
-            -webkit-backdrop-filter: blur(36px) saturate(1.3);
+            backdrop-filter: blur(12px) saturate(1.15);
+            -webkit-backdrop-filter: blur(12px) saturate(1.15);
         }
 
         .login-box.show {
@@ -220,7 +222,7 @@
         .main-container {
             width: 100%;
             max-width: 1100px;
-            background: rgba(20, 15, 30, 0.38);
+            background: rgba(20, 15, 30, 0.22);
             border-radius: 18px;
             box-shadow: 0 0 32px 8px rgba(200,162,255,0.18), 0 18px 60px 0 rgba(0,0,0,0.85);
             overflow: hidden;
@@ -228,8 +230,8 @@
             opacity: 1;
             transform: translateY(0);
             display: none;
-            backdrop-filter: blur(36px) saturate(1.3);
-            -webkit-backdrop-filter: blur(36px) saturate(1.3);
+            backdrop-filter: blur(12px) saturate(1.15);
+            -webkit-backdrop-filter: blur(12px) saturate(1.15);
         }
 
         /* Header Styles */
@@ -351,11 +353,11 @@
             display: none;
             max-height: 600px;
             overflow-y: auto;
-            background: rgba(20, 15, 30, 0.28);
+            background: rgba(20, 15, 30, 0.13);
             border-radius: 14px;
             box-shadow: 0 0 18px 4px rgba(200,162,255,0.10);
-            backdrop-filter: blur(24px) saturate(1.15);
-            -webkit-backdrop-filter: blur(24px) saturate(1.15);
+            backdrop-filter: blur(12px) saturate(1.1);
+            -webkit-backdrop-filter: blur(12px) saturate(1.1);
         }
 
         .tab-content.active {
@@ -386,15 +388,15 @@
         }
 
         .control-group {
-            background: rgba(25, 23, 36, 0.32);
+            background: rgba(25, 23, 36, 0.13);
             border: 1.5px solid var(--accent-lilac, #c8a2c8);
             border-radius: 16px;
             padding: 28px;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: 0 0 24px 6px rgba(200,162,255,0.13), 0 8px 32px rgba(0,0,0,0.32);
             position: relative;
-            backdrop-filter: blur(28px) saturate(1.2);
-            -webkit-backdrop-filter: blur(28px) saturate(1.2);
+            backdrop-filter: blur(12px) saturate(1.1);
+            -webkit-backdrop-filter: blur(12px) saturate(1.1);
         }
 
         .control-group:hover {
@@ -442,7 +444,7 @@
             bottom: 125%;
             left: 50%;
             transform: translateX(-50%) translateY(10px);
-            background: rgba(30, 20, 40, 0.18);
+            background: rgba(30, 20, 40, 0.10);
             border: 1.5px solid var(--accent-lilac);
             border-radius: 14px;
             padding: 16px;
@@ -452,8 +454,8 @@
             font-weight: normal;
             z-index: 100;
             box-shadow: 0 0 24px 6px rgba(200,162,255,0.22), 0 10px 30px rgba(0, 0, 0, 0.45);
-            backdrop-filter: blur(36px) saturate(1.2);
-            -webkit-backdrop-filter: blur(36px) saturate(1.2);
+            backdrop-filter: blur(12px) saturate(1.1);
+            -webkit-backdrop-filter: blur(12px) saturate(1.1);
             text-align: center;
             opacity: 0;
             visibility: hidden;
@@ -778,12 +780,12 @@
         /* Floating particles */
         .particles {
             position: fixed;
-            width: 100%;
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
             top: 0;
             left: 0;
             pointer-events: none;
-            z-index: -1;
+            z-index: 0;
             overflow: hidden;
         }
 
@@ -2254,5 +2256,4 @@
     </script>
 </body>
 </html>
-
 
