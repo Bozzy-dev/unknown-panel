@@ -860,6 +860,78 @@
                 text-align: center;
             }
         }
+
+        /* Custom Dropdown Styles */
+        .custom-dropdown {
+            position: relative;
+            width: 100%;
+            user-select: none;
+        }
+        .dropdown-selected {
+            padding: 14px 20px;
+            border-radius: 12px;
+            background: rgba(35, 30, 45, 0.45);
+            border: 1.5px solid var(--accent-lilac);
+            color: var(--text-primary);
+            font-size: 16px;
+            box-shadow: 0 0 12px 2px rgba(200,162,255,0.10);
+            backdrop-filter: blur(10px) saturate(1.1);
+            -webkit-backdrop-filter: blur(10px) saturate(1.1);
+            cursor: pointer;
+            transition: border 0.25s, box-shadow 0.25s, background 0.25s;
+            position: relative;
+        }
+        .dropdown-selected::after {
+            content: '\f078';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent-lilac-light);
+            pointer-events: none;
+            transition: color 0.3s;
+        }
+        .custom-dropdown.open .dropdown-selected {
+            border: 1.5px solid var(--accent-lilac-light);
+            box-shadow: 0 0 18px 4px rgba(200,162,255,0.18);
+            background: rgba(35, 30, 45, 0.60);
+        }
+        .dropdown-list {
+            position: absolute;
+            left: 0;
+            top: 110%;
+            width: 100%;
+            background: rgba(35, 30, 45, 0.65);
+            border: 1.5px solid var(--accent-lilac);
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(200,162,255,0.13), 0 8px 32px rgba(0,0,0,0.22);
+            backdrop-filter: blur(10px) saturate(1.1);
+            -webkit-backdrop-filter: blur(10px) saturate(1.1);
+            z-index: 10;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(-10px) scaleY(0.95);
+            transition: opacity 0.25s, transform 0.25s;
+        }
+        .custom-dropdown.open .dropdown-list {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0) scaleY(1);
+        }
+        .dropdown-option {
+            padding: 14px 20px;
+            color: var(--text-primary);
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: background 0.18s, color 0.18s;
+        }
+        .dropdown-option:hover, .dropdown-option.active {
+            background: var(--accent-lilac);
+            color: #fff;
+        }
     </style>
 </head>
 <body>
@@ -941,10 +1013,12 @@
                         </div>
                     </div>
                     
-                    <div class="combo-box">
-                        <select>
-                            <option>Aim Type: Memory</option>
-                        </select>
+                    <div class="combo-box custom-dropdown" id="aimTypeDropdown">
+                        <div class="dropdown-selected" id="aimTypeSelected">Aim Type: Memory</div>
+                        <div class="dropdown-list" id="aimTypeList">
+                            <div class="dropdown-option active">Aim Type: Memory</div>
+                            <div class="dropdown-option">Aim Type: Mouse</div>
+                        </div>
                     </div>
                     
                     <div class="control-header">
@@ -2286,7 +2360,44 @@
             `;
             document.head.appendChild(style);
         }
+
+        // Custom Dropdown for Aim Type
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdown = document.getElementById('aimTypeDropdown');
+            if (!dropdown) return;
+            const selected = document.getElementById('aimTypeSelected');
+            const list = document.getElementById('aimTypeList');
+            const options = list.querySelectorAll('.dropdown-option');
+            let open = false;
+            selected.addEventListener('click', function(e) {
+                e.stopPropagation();
+                dropdown.classList.toggle('open');
+                open = dropdown.classList.contains('open');
+            });
+            options.forEach(option => {
+                option.addEventListener('click', function(e) {
+                    options.forEach(o => o.classList.remove('active'));
+                    this.classList.add('active');
+                    selected.textContent = this.textContent;
+                    dropdown.classList.remove('open');
+                    open = false;
+                });
+            });
+            // Close dropdown on outside click
+            document.addEventListener('click', function(e) {
+                if (open) {
+                    dropdown.classList.remove('open');
+                    open = false;
+                }
+            });
+            // Keyboard navigation (optional)
+            selected.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    dropdown.classList.toggle('open');
+                    open = dropdown.classList.contains('open');
+                }
+            });
+        });
     </script>
 </body>
 </html>
-
