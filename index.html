@@ -932,11 +932,124 @@
             background: rgba(200,162,255,0.22);
             color: var(--accent-lilac-dark);
         }
+
+        /* Toast Notification */
+        #toast-container {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            z-index: 99999;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .toast {
+            min-width: 220px;
+            max-width: 320px;
+            background: rgba(35, 30, 45, 0.55);
+            color: var(--text-primary);
+            border-radius: 14px;
+            padding: 18px 28px;
+            font-size: 16px;
+            font-weight: 500;
+            box-shadow: 0 4px 24px rgba(200,162,255,0.18), 0 2px 8px rgba(0,0,0,0.18);
+            border: 1.5px solid var(--accent-lilac);
+            backdrop-filter: blur(10px) saturate(1.1);
+            -webkit-backdrop-filter: blur(10px) saturate(1.1);
+            opacity: 0;
+            transform: translateY(30px) scale(0.98);
+            animation: toast-in 0.5s cubic-bezier(.4,1.6,.6,1) forwards;
+        }
+        @keyframes toast-in {
+            from { opacity: 0; transform: translateY(30px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .toast-out {
+            animation: toast-out 0.4s cubic-bezier(.4,1.6,.6,1) forwards;
+        }
+        @keyframes toast-out {
+            from { opacity: 1; transform: translateY(0) scale(1); }
+            to { opacity: 0; transform: translateY(30px) scale(0.98); }
+        }
+
+        /* Fade/slide-in for panels and tab content */
+        .tab-content {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+        .tab-content.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .main-container {
+            box-shadow: 0 0 32px 8px rgba(200,162,255,0.18), 0 18px 60px 0 rgba(0,0,0,0.85) inset;
+            /* Soft inner shadow for depth */
+        }
+        .control-group {
+            box-shadow: 0 0 24px 6px rgba(200,162,255,0.13), 0 8px 32px rgba(0,0,0,0.32) inset;
+        }
+
+        /* Shimmer/flare effect on logo and primary buttons */
+        .logo h1, .btn-primary {
+            position: relative;
+            overflow: hidden;
+        }
+        .logo h1::after, .btn-primary::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -75%;
+            width: 50%; height: 100%;
+            background: linear-gradient(120deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.55) 50%, rgba(255,255,255,0.18) 100%);
+            pointer-events: none;
+            transform: skewX(-20deg);
+            animation: shimmer 2.5s infinite;
+        }
+        @keyframes shimmer {
+            0% { left: -75%; }
+            60% { left: 120%; }
+            100% { left: 120%; }
+        }
+
+        /* Focus ring for keyboard users */
+        .btn:focus, .dropdown-selected:focus, .range-slider:focus {
+            outline: 2.5px solid var(--accent-lilac-light);
+            outline-offset: 2px;
+        }
+
+        /* Responsive improvements */
+        @media (max-width: 768px) {
+            .tabs {
+                flex-direction: column;
+            }
+            .tab {
+                padding: 15px;
+            }
+            .tab-content {
+                padding: 16px 6px 12px 6px;
+            }
+            .controls-grid {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+            .control-group {
+                padding: 14px;
+            }
+            .logo h1 {
+                font-size: 20px;
+            }
+            footer {
+                flex-direction: column;
+                text-align: center;
+                padding: 12px 6px;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="blur-layer"></div>
     <div class="particles" id="particles"></div>
+    <div id="toast-container"></div>
     
     <!-- Login Panel -->
     <div class="login-container" id="loginContainer">
@@ -1103,13 +1216,14 @@
                         </div>
                     </div>
                     
-                    <div class="combo-box">
-                        <select>
-                            <option>Hit Box: Head</option>
-                            <option>Hit Box: Neck</option>
-                            <option>Hit Box: Chest</option>
-                            <option>Hit Box: Pelvis</option>
-                        </select>
+                    <div class="combo-box custom-dropdown" id="hitBoxDropdown">
+                        <div class="dropdown-selected" id="hitBoxSelected">Hit Box: Head</div>
+                        <div class="dropdown-list" id="hitBoxList">
+                            <div class="dropdown-option active">Hit Box: Head</div>
+                            <div class="dropdown-option">Hit Box: Neck</div>
+                            <div class="dropdown-option">Hit Box: Chest</div>
+                            <div class="dropdown-option">Hit Box: Pelvis</div>
+                        </div>
                     </div>
                 </div>
                 
@@ -1350,12 +1464,13 @@
                         </div>
                     </div>
                     
-                    <div class="combo-box">
-                        <select>
-                            <option>Skeleton Type: Normal</option>
-                            <option>Skeleton Type: Advanced</option>
-                            <option>Skeleton Type: Simple</option>
-                        </select>
+                    <div class="combo-box custom-dropdown" id="skeletonTypeDropdown">
+                        <div class="dropdown-selected" id="skeletonTypeSelected">Skeleton Type: Normal</div>
+                        <div class="dropdown-list" id="skeletonTypeList">
+                            <div class="dropdown-option active">Skeleton Type: Normal</div>
+                            <div class="dropdown-option">Skeleton Type: Advanced</div>
+                            <div class="dropdown-option">Skeleton Type: Simple</div>
+                        </div>
                     </div>
                     
                     <div class="control-header">
@@ -1417,12 +1532,13 @@
                         </div>
                     </div>
                     
-                    <div class="combo-box">
-                        <select>
-                            <option>Box Type: 2D</option>
-                            <option>Box Type: 3D</option>
-                            <option>Box Type: Corner</option>
-                        </select>
+                    <div class="combo-box custom-dropdown" id="boxTypeDropdown">
+                        <div class="dropdown-selected" id="boxTypeSelected">Box Type: 2D</div>
+                        <div class="dropdown-list" id="boxTypeList">
+                            <div class="dropdown-option active">Box Type: 2D</div>
+                            <div class="dropdown-option">Box Type: 3D</div>
+                            <div class="dropdown-option">Box Type: Corner</div>
+                        </div>
                     </div>
                     
                     <div class="control-header">
@@ -1523,12 +1639,13 @@
                         </div>
                     </div>
                     
-                    <div class="combo-box">
-                        <select>
-                            <option>Snap Line Type: To Player</option>
-                            <option>Snap Line Type: From Bottom</option>
-                            <option>Snap Line Type: From Top</option>
-                        </select>
+                    <div class="combo-box custom-dropdown" id="snapLineTypeDropdown">
+                        <div class="dropdown-selected" id="snapLineTypeSelected">Snap Line Type: To Player</div>
+                        <div class="dropdown-list" id="snapLineTypeList">
+                            <div class="dropdown-option active">Snap Line Type: To Player</div>
+                            <div class="dropdown-option">Snap Line Type: From Bottom</div>
+                            <div class="dropdown-option">Snap Line Type: From Top</div>
+                        </div>
                     </div>
                     
                     <div class="control-header">
@@ -1734,14 +1851,15 @@
                         </div>
                     </div>
                     
-                    <div class="combo-box">
-                        <select>
-                            <option>Weapon Type: Assault Rifle</option>
-                            <option>Weapon Type: Shotgun</option>
-                            <option>Weapon Type: SMG</option>
-                            <option>Weapon Type: Pistol</option>
-                            <option>Weapon Type: Sniper</option>
-                        </select>
+                    <div class="combo-box custom-dropdown" id="weaponTypeDropdown">
+                        <div class="dropdown-selected" id="weaponTypeSelected">Weapon Type: Assault Rifle</div>
+                        <div class="dropdown-list" id="weaponTypeList">
+                            <div class="dropdown-option active">Weapon Type: Assault Rifle</div>
+                            <div class="dropdown-option">Weapon Type: Shotgun</div>
+                            <div class="dropdown-option">Weapon Type: SMG</div>
+                            <div class="dropdown-option">Weapon Type: Pistol</div>
+                            <div class="dropdown-option">Weapon Type: Sniper</div>
+                        </div>
                     </div>
                     
                     <div class="slider-container">
@@ -2396,6 +2514,163 @@
                     dropdown.classList.toggle('open');
                     open = dropdown.classList.contains('open');
                 }
+            });
+            // Add custom dropdown logic for all new dropdowns
+            function setupCustomDropdown(dropdownId, selectedId, listId) {
+                const dropdown = document.getElementById(dropdownId);
+                if (!dropdown) return;
+                const selected = document.getElementById(selectedId);
+                const list = document.getElementById(listId);
+                const options = list.querySelectorAll('.dropdown-option');
+                let open = false;
+                selected.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    dropdown.classList.toggle('open');
+                    open = dropdown.classList.contains('open');
+                });
+                options.forEach(option => {
+                    option.addEventListener('click', function(e) {
+                        options.forEach(o => o.classList.remove('active'));
+                        this.classList.add('active');
+                        selected.textContent = this.textContent;
+                        dropdown.classList.remove('open');
+                        open = false;
+                    });
+                });
+                document.addEventListener('click', function(e) {
+                    if (open) {
+                        dropdown.classList.remove('open');
+                        open = false;
+                    }
+                });
+                selected.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        dropdown.classList.toggle('open');
+                        open = dropdown.classList.contains('open');
+                    }
+                });
+            }
+            setupCustomDropdown('hitBoxDropdown', 'hitBoxSelected', 'hitBoxList');
+            setupCustomDropdown('skeletonTypeDropdown', 'skeletonTypeSelected', 'skeletonTypeList');
+            setupCustomDropdown('boxTypeDropdown', 'boxTypeSelected', 'boxTypeList');
+            setupCustomDropdown('snapLineTypeDropdown', 'snapLineTypeSelected', 'snapLineTypeList');
+            setupCustomDropdown('weaponTypeDropdown', 'weaponTypeSelected', 'weaponTypeList');
+        });
+
+        // Toast Notification System
+        function showToast(message, duration = 2500) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = message;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.classList.add('toast-out');
+                setTimeout(() => toast.remove(), 400);
+            }, duration);
+        }
+
+        // Animate login/main transitions
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginBox = document.getElementById('loginBox');
+            if (loginBox) {
+                loginBox.style.opacity = 0;
+                loginBox.style.transform = 'scale(0.92) translateY(40px)';
+                setTimeout(() => {
+                    loginBox.style.transition = 'all 0.7s cubic-bezier(.4,1.6,.6,1)';
+                    loginBox.style.opacity = 1;
+                    loginBox.style.transform = 'scale(1) translateY(0)';
+                }, 100);
+            }
+        });
+
+        // Animate tab switching
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.tab-content').forEach(c => {
+                    c.classList.remove('active');
+                    c.style.opacity = 0;
+                    c.style.transform = 'translateY(24px)';
+                });
+                const tabId = tab.getAttribute('data-tab');
+                const content = document.getElementById(`${tabId}-tab`);
+                if (content) {
+                    setTimeout(() => {
+                        content.classList.add('active');
+                        content.style.opacity = 1;
+                        content.style.transform = 'translateY(0)';
+                    }, 50);
+                }
+            });
+        });
+
+        // Animate tooltips
+        document.querySelectorAll('.tooltip-icon').forEach(icon => {
+            const tooltip = icon.querySelector('.tooltip-text');
+            if (tooltip) {
+                icon.addEventListener('mouseenter', () => {
+                    tooltip.style.transition = 'opacity 0.4s, transform 0.4s';
+                    tooltip.style.opacity = 1;
+                    tooltip.style.transform = 'translateX(-50%) translateY(0)';
+                });
+                icon.addEventListener('mouseleave', () => {
+                    tooltip.style.opacity = 0;
+                    tooltip.style.transform = 'translateX(-50%) translateY(10px)';
+                });
+            }
+        });
+
+        // Settings Persistence (toggles, sliders, colors)
+        function saveSetting(key, value) {
+            localStorage.setItem('flare_' + key, JSON.stringify(value));
+        }
+        function loadSetting(key, fallback) {
+            const v = localStorage.getItem('flare_' + key);
+            return v ? JSON.parse(v) : fallback;
+        }
+        // Toggles
+        document.querySelectorAll('.toggle-switch input[type="checkbox"]').forEach((toggle, idx) => {
+            const key = toggle.id || 'toggle_' + idx;
+            // Load
+            const saved = loadSetting(key, null);
+            if (saved !== null) toggle.checked = saved;
+            // Save
+            toggle.addEventListener('change', () => {
+                saveSetting(key, toggle.checked);
+                showToast('Setting saved!');
+            });
+        });
+        // Sliders
+        document.querySelectorAll('.range-slider').forEach((slider, idx) => {
+            const key = slider.id || 'slider_' + idx;
+            // Load
+            const saved = loadSetting(key, null);
+            if (saved !== null) slider.value = saved;
+            // Save
+            slider.addEventListener('input', () => {
+                saveSetting(key, slider.value);
+                showToast('Setting saved!');
+            });
+        });
+        // Color pickers
+        document.querySelectorAll('.color-preview').forEach((preview, idx) => {
+            const key = preview.id || 'color_' + idx;
+            // Load
+            const saved = loadSetting(key, null);
+            if (saved) preview.style.backgroundColor = saved;
+            // Save
+            preview.addEventListener('click', () => {
+                setTimeout(() => {
+                    const modal = document.getElementById('customColorPickerModal');
+                    if (!modal) return;
+                    const confirm = modal.querySelector('#ccp-confirm');
+                    if (confirm) {
+                        confirm.addEventListener('click', () => {
+                            saveSetting(key, preview.style.backgroundColor);
+                            showToast('Color updated!');
+                        }, { once: true });
+                    }
+                }, 100);
             });
         });
     </script>
